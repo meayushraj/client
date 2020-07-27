@@ -23,6 +23,7 @@ import InstructorAddCourse from "./Pages/Instructor/instructor-add-course";
 import ForgotPassword from "./Pages/forgotpassword";
 import resetpassword from "./Pages/resetpassword";
 import WizardForm from "./Pages/WizardForm/WizardForm";
+import RegMoadl from "./Pages/Modal/RegModal";
 
 if (localStorage.token) {
   // set auth token
@@ -53,6 +54,7 @@ function App() {
             exact
             component={resetpassword}
           />
+          <Route path="/regmodal" rxact component={RegMoadl} />
           {/*Insructor*/}
           <Route
             path="/instructor-dashboard"

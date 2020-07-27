@@ -1,45 +1,73 @@
-import React from "react"
-import { connect } from "react-redux"
+import React from "react";
+import { connect } from "react-redux";
+import "../Pages/Modal/modal.css";
 
-import { Link, withRouter } from "react-router-dom"
-import { SingupAction } from "../Actions/actions"
+import { Link, withRouter } from "react-router-dom";
+import { SingupAction } from "../Actions/actions";
+import RegForm from "./RegForm/Regform";
 
 class SignupPage extends React.Component {
   constructor() {
-    super()
-    this.state = { username: "", email: "", password: "" }
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    super();
+    this.state = { username: "", email: "", password: "" };
+    this.onChange = this.onChange.bind(this);
+    // this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentDidMount() {
     if (this.props.Credentials.isAuthenticated) {
-      this.props.history.push("/")
+      this.props.history.push("/");
     }
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function () {
+      modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    };
   }
 
   onChange(e) {
-    this.setState({ [e.target.name]: e.target.value })
+    this.setState({ [e.target.name]: e.target.value });
   }
 
-  onSubmit(e) {
-    e.preventDefault()
-    const newUser = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password
-    }
-    this.props.SingupAction(newUser, this.props.history)
-  }
+  // onSubmit(e) {
+  //   e.preventDefault();
+  //   const newUser = {
+  //     username: this.state.username,
+  //     email: this.state.email,
+  //     password: this.state.password,
+  //   };
+  //   this.props.SingupAction(newUser, this.props.history);
+  // }
 
   render() {
+    console.log(111);
     return (
       <div className="layout-default layout-login-image">
         <div
           className="layout-login-image__overlay"
           style={{
             backgroundImage:
-              "url(assets/images/photodune-4161018-group-of-students-m.jpg)"
+              "url(assets/images/photodune-4161018-group-of-students-m.jpg)",
           }}
         >
           <div className="fullbleed bg-dark" style={{ opacity: ".5" }}></div>
@@ -131,9 +159,28 @@ class SignupPage extends React.Component {
             </div>
 
             <div className="form-group text-center">
-              <button className="btn btn-primary mb-2" type="submit">
+              <button
+                id="myBtn"
+                className="btn btn-primary mb-2"
+                onClick={(e) => e.preventDefault()}
+                type="submit"
+              >
                 Create Account
               </button>
+
+              <div id="myModal" class="modal">
+                <div
+                  class="modal-content"
+                  style={{ width: "500px", marginLeft: "500px" }}
+                >
+                  <span class="close">&times;</span>
+                  <RegForm
+                    username={this.state.username}
+                    email={this.state.email}
+                    password={this.state.password}
+                  />
+                </div>
+              </div>
               <br />
               <Link className="text-body text-underline" to="/login">
                 Have an account? Login
@@ -142,13 +189,13 @@ class SignupPage extends React.Component {
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = (state) => ({
-  Credentials: state.Credentials
-})
+  Credentials: state.Credentials,
+});
 
 export default connect(mapStateToProps, { SingupAction })(
   withRouter(SignupPage)
-)
+);
