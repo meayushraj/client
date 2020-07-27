@@ -13,14 +13,16 @@ class Form extends React.Component {
     taskList: [
       {
         index: Math.random(),
-        SectionNumber: "",
-        SectionName: "",
+        VideoNumber: "",
+        VideoName: "",
       },
     ],
+    SectionTitle: "",
+    count: 0,
   };
 
   handleChange = (e) => {
-    if (["SectionNumber", "SectionName"].includes(e.target.name)) {
+    if (["VideoNumber", "VideoName"].includes(e.target.name)) {
       let taskList = [...this.state.taskList];
       taskList[e.target.dataset.id][e.target.name] = e.target.value;
     } else {
@@ -33,11 +35,12 @@ class Form extends React.Component {
         ...prevState.taskList,
         {
           index: Math.random(),
-          SectionNumber: "",
-          SectionName: "",
+          VideoNumber: "",
+          VideoName: "",
         },
       ],
     }));
+    this.setState({ count: this.state.count + 1 });
   };
 
   deteteRow = (index) => {
@@ -104,12 +107,21 @@ class Form extends React.Component {
               <div className="card">
                 <div className="card-header text-center">Add Your Sections</div>
                 <div className="card-body">
-                  <div className="row"></div>
+                  <div className="row">
+                    <label className="required">Section Name</label>
+                    <input
+                      type="text"
+                      name="SectionTitle"
+                      id="SectionTitle"
+                      className="form-control"
+                      placeholder="Enter Section Title"
+                    />
+                  </div>
                   <table className="table">
                     <thead>
                       <tr>
-                        <th className="required">Section Number</th>
-                        <th className="required">Section Name</th>
+                        <th className="required">Video</th>
+                        <th className="required">Video Name</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -117,6 +129,7 @@ class Form extends React.Component {
                         add={this.addNewRow}
                         delete={this.clickOnDelete.bind(this)}
                         taskList={taskList}
+                        count={this.state.count}
                       />
                     </tbody>
                     <tfoot>

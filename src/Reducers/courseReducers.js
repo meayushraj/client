@@ -1,29 +1,32 @@
-import _ from "lodash"
+import _ from "lodash";
 
 const initialState = {
   isAuthenticated: false,
   user: {},
-  courses: {}
-}
+  courses: {},
+};
 export const ReducerCourses = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_COURSES":
-      return { ...state, courses: action.payload }
+      return { ...state, courses: action.payload };
     case "FETCH_INSTRUCTOR_COURSES":
-      return { ...state, ..._.mapKeys(action.payload, "id") }
+      return { ...state, ..._.mapKeys(action.payload, "id") };
     case "ADD_COURSE":
-      return { ...state, [action.payload.id]: action.payload }
+      return { ...state, [action.payload.id]: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export const ReducersSection = (state = {}, action) => {
+export const ReducersSection = (state = [], action) => {
   switch (action.type) {
     case "ADD_SECTION": {
-      return action.payload
+      console.log(state);
+      console.log(action.payload);
+      console.log(12121212);
+      return [...state, action.payload];
     }
     default:
-      return state
+      return state;
   }
-}
+};

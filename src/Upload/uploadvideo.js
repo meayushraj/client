@@ -79,7 +79,6 @@ class UploadVideo extends Component {
       return (
         <div>
           <br />
-          <h5>Choose before Pressing the Upload button</h5>
         </div>
       );
     }
@@ -99,7 +98,12 @@ class UploadVideo extends Component {
               label={`${Uploadpercentage}%`}
             />
           )}
-          <button onClick={this.onFileUpload}>Upload!</button>
+          <button
+            class="btn btn-outline-dark mb-24pt mb-sm-0 "
+            onClick={this.onFileUpload}
+          >
+            Upload!
+          </button>
         </div>
         {this.fileData()}
       </div>
