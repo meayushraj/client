@@ -25,8 +25,8 @@ const WizardFormFirstPage = (props) => {
 
               <Field
                 name="Discription"
-                type="text"
-                component={renderField}
+                type="textarea"
+                component={renderTextArea}
                 label="Short Discription"
               />
               <div>

@@ -51,26 +51,31 @@ class Form extends React.Component {
     // taskList1.splice(index, 1);
     // this.setState({ taskList: taskList1 });
   };
-  handleSubmit = (e) => {
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(this.state);
+  //   if (this.state.date === "" || this.state.description === "") {
+  //     NotificationManager.warning(
+  //       "Please Fill up Required Field . Please check Task and Date Field"
+  //     );
+  //     return false;
+  //   }
+  //   for (var i = 0; i < this.state.taskList.length; i++) {
+  //     if (
+  //       this.state.taskList[i].projectName === "" ||
+  //       this.state.taskList[i].task === ""
+  //     ) {
+  //       NotificationManager.warning(
+  //         "Please Fill up Required Field.Please Check Project name And Task Field"
+  //       );
+  //       return false;
+  //     }
+  //   }
+  //   this.props.addsections(this.state);
+  // };
+  onsubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    if (this.state.date === "" || this.state.description === "") {
-      NotificationManager.warning(
-        "Please Fill up Required Field . Please check Task and Date Field"
-      );
-      return false;
-    }
-    for (var i = 0; i < this.state.taskList.length; i++) {
-      if (
-        this.state.taskList[i].projectName === "" ||
-        this.state.taskList[i].task === ""
-      ) {
-        NotificationManager.warning(
-          "Please Fill up Required Field.Please Check Project name And Task Field"
-        );
-        return false;
-      }
-    }
     this.props.addsections(this.state);
   };
 
@@ -152,7 +157,10 @@ class Form extends React.Component {
                 </div>
                 <div className="card-footer text-center">
                   {" "}
-                  <button type="submit" className="btn btn-primary text-center">
+                  <button
+                    onClick={this.onsubmit}
+                    className="btn btn-primary text-center"
+                  >
                     Add All these Sections
                   </button>
                 </div>

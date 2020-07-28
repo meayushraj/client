@@ -33,7 +33,7 @@ class WizardFormThirdPage extends React.Component {
     super(props);
     this.state = { newUser: this.props.newUser };
   }
-  submit = (formValues) => {
+  onSubmit = (formValues) => {
     console.log(formValues);
     console.log(this.state.newUser);
     const newUser = { ...this.state.newUser, formValues };
@@ -44,7 +44,7 @@ class WizardFormThirdPage extends React.Component {
     console.log(this.props);
     const { handleSubmit, pristine, previousPage, submitting } = this.props;
     return (
-      <form onSubmit={this.props.handleSubmit(this.submit)}>
+      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <div>
           <label class="form-label">Field of Interest</label>
           <Field name="FieldOfInterest" component={renderInterestSelector} />

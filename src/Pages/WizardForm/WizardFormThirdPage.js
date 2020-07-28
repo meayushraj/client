@@ -1,54 +1,106 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import validate from "./validate";
-import { renderField } from "./renderField";
+import { renderField, renderTextArea } from "./renderField";
 import UploadImageVaishnav from "../../Upload/UploadImageVaishnav";
+import { reduceRight } from "lodash";
 
-const WizardFormThirdPage = (props) => {
-  const { handleSubmit, previousPage } = props;
-  return (
-    <div class="page-section border-bottom-2">
-      <div class="container-fluid page__container">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="page-separator">
-              <div class="page-separator__text">Cost of your Course</div>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <Field
-                name="Price"
-                type="number"
-                component={renderField}
-                label="Price"
-              />
-              <br />
-              <br />
-              <div>
-                <UploadImageVaishnav title="Add Your Cover Image Here" />
-                <br />
-                <br />
-                <button
-                  class="btn btn-outline-dark mb-24pt mb-sm-0"
-                  type="button"
-                  onClick={previousPage}
-                >
-                  Previous
-                </button>
-                <button
-                  class="btn btn-outline-dark mb-24pt mb-sm-0"
-                  type="submit"
-                  style={{ float: "right" }}
-                >
-                  next
-                </button>
+const renderError = ({ meta: { touched, error } }) =>
+  touched && error ? <span>{error}</span> : false;
+
+class WizardFormThirdPage extends React.Component {
+  state = { sel: "free" };
+
+  renderprice() {
+    if (this.state.sel === "paid") {
+      return (
+        <Field
+          name="Price"
+          type="number"
+          component={renderField}
+          label="Price"
+        />
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+  render() {
+    console.log(this.state);
+    const { handleSubmit, previousPage } = this.props;
+    return (
+      <div class="page-section border-bottom-2">
+        <div class="container-fluid page__container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="page-separator">
+                <div class="page-separator__text">Cost of your Course</div>
               </div>
-            </form>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label class="form-label" style={{ fontSize: "20px" }}>
+                    Is Your Course Free or Paid?
+                  </label>
+                  <div>
+                    <label>
+                      <Field
+                        name="feeStructure"
+                        component="input"
+                        type="radio"
+                        value="free"
+                        class="form-label"
+                        onChange={(e) => this.setState({ sel: e.target.value })}
+                      />{" "}
+                      Free
+                    </label>
+                    <br />
+                    <label>
+                      <Field
+                        name="feeStructure"
+                        component="input"
+                        type="radio"
+                        value="paid"
+                        class="form-label"
+                        onChange={(e) => this.setState({ sel: e.target.value })}
+                      />{" "}
+                      Paid
+                    </label>
+                    <br />
+
+                    <Field name="feeStructure" component={renderError} />
+                  </div>
+                </div>
+                {this.renderprice()}
+
+                <br />
+                <br />
+                <div>
+                  <UploadImageVaishnav title="Add Your Cover Image Here" />
+                  <br />
+                  <br />
+                  <button
+                    class="btn btn-outline-dark mb-24pt mb-sm-0"
+                    type="button"
+                    onClick={previousPage}
+                  >
+                    Previous
+                  </button>
+                  <button
+                    class="btn btn-outline-dark mb-24pt mb-sm-0"
+                    type="submit"
+                    style={{ float: "right" }}
+                  >
+                    next
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default reduxForm({
   form: "wizard", // <------ same form name

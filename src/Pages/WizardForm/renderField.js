@@ -1,4 +1,5 @@
 import React from "react";
+import { Editor } from "@tinymce/tinymce-react";
 
 export const renderField = ({
   input,
@@ -33,6 +34,8 @@ export const renderTextArea = ({
         {...input}
         placeholder={label}
         type={type}
+        rows="10"
+        cols="80"
       />
       {touched && error && <span>{error}</span>}
     </div>
