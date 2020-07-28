@@ -1,7 +1,9 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 // import { UploadImageAction } from '../Actions/actions'
-import ImageUploader from "react-images-upload"
-import axios from "axios"
+import ImageUploader from 'react-images-upload'
+import axios from 'axios'
+import { connect } from 'react-redux'
+import { VaihnavUploadImageAction } from '../Actions/actions'
 
 class UploadImageVaishnav extends Component {
   constructor(props) {
@@ -9,30 +11,36 @@ class UploadImageVaishnav extends Component {
     this.state = { pictures: [] }
     this.onDrop = this.onDrop.bind(this)
     this.uploadImages = this.uploadImages.bind(this)
+    // this.props.onDone(this.state.imageUrl)
   }
 
   onDrop(picture) {
     this.setState({
-      pictures: this.state.pictures.concat(picture)
+      pictures: this.state.pictures.concat(picture),
     })
   }
 
   uploadImages() {
+    const pictures = this.state.pictures
+    this.props.VaihnavUploadImageAction(pictures)
     console.log(this.state.pictures)
-    let uploadPromises = this.state.pictures.map((image) => {
-      let data = new FormData()
-      data.append("image", image, image.name)
-      console.log(data)
-      return axios.post("/image/upload", data)
-    })
-    axios
-      .all(uploadPromises)
-      .then((results) => {
-        console.log(results)
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    // console.log(this.state.pictures)
+    // let uploadPromises = this.state.pictures.map((image) => {
+    //   let data = new FormData()
+    //   data.append('image', image, image.name)
+    //   console.log(data)
+    //   return axios.post('/image/upload', data)
+    // })
+    // axios
+    //   .all(uploadPromises)
+    //   .then((results) => {
+    //     const imageUrl = results[0].data.downloadUrl
+    //     this.setState({ imageUrl: imageUrl })
+    //     console.log(imageUrl)
+    //   })
+    //   .catch((e) => {
+    //     console.log(e)
+    //   })
   }
 
   render() {
@@ -42,9 +50,9 @@ class UploadImageVaishnav extends Component {
         <ImageUploader
           withIcon={true}
           withPreview={true}
-          buttonText="Choose image"
+          buttonText='Choose image'
           onChange={this.onDrop}
-          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          imgExtension={['.jpg', '.gif', '.png', '.gif']}
           maxFileSize={5242880}
         />
         <button onClick={this.uploadImages}>Upload image</button>
@@ -52,5 +60,10 @@ class UploadImageVaishnav extends Component {
     )
   }
 }
-
-export default UploadImageVaishnav
+const mapStateToProps = (state) => {
+  console.log(state)
+  return state
+}
+export default connect(mapStateToProps, { VaihnavUploadImageAction })(
+  UploadImageVaishnav
+)
