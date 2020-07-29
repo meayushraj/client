@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ProgressBar } from "react-bootstrap";
-
+import { connect } from "react-redux";
 import React, { Component } from "react";
+import { UploadVideoAction } from "../Actions/actions";
 
 class UploadVideo extends Component {
   state = {
@@ -24,7 +25,7 @@ class UploadVideo extends Component {
 
     // Update the formData object
     formData.append(
-      "myFile",
+      "image",
       this.state.selectedFile,
       this.state.selectedFile.name
     );
@@ -45,20 +46,17 @@ class UploadVideo extends Component {
 
     // Request made to the backend api
     // Send formData object
-    axios
-      .post(
-        "https://run.mocky.io/v3/b5207b39-0238-484c-9bfc-7573674d0e3c",
-        formData,
-        options
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({ Uploadpercentage: 100 }, () => {
-          setTimeout(() => {
-            this.setState({ Uploadpercentage: 0 });
-          }, 1000);
-        });
-      }); //Here give the backend where to upload the files
+
+    this.props.UploadVideoAction(formData, options);
+    //axios.post("/image/file-upload", formData, options).then((res) => {
+    //console.log(res);
+
+    this.setState({ Uploadpercentage: 100 }, () => {
+      setTimeout(() => {
+        this.setState({ Uploadpercentage: 0 });
+      }, 1000);
+    });
+    //Here give the backend where to upload the files
   };
 
   // File content to be displayed after
@@ -92,13 +90,13 @@ class UploadVideo extends Component {
         <h3>{this.props.title}</h3>
         <div>
           <input type="file" onChange={this.onFileChange} />
-          {Uploadpercentage > 0 && (
-            <ProgressBar
-              now={Uploadpercentage}
-              active
-              label={`${Uploadpercentage}%`}
-            />
-          )}
+          {/* {Uploadpercentage > 0 && (
+            // <ProgressBar
+            //   now={Uploadpercentage}
+            //   active
+            //   label={`${Uploadpercentage}%`}
+            // />
+          )} */}
           <button
             class="btn btn-outline-dark mb-24pt mb-sm-0 "
             onClick={this.onFileUpload}
@@ -111,5 +109,9 @@ class UploadVideo extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  console.log(state);
+  return state;
+};
 
-export default UploadVideo;
+export default connect(mapStateToProps, { UploadVideoAction })(UploadVideo);

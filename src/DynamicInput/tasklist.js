@@ -44,7 +44,8 @@ const TaskList = (props) => {
             title="ADD Matreials"
           >
             <button onClick={(e) => e.stopPropagation()}>
-              <UploadVideo title="Upload Video" />
+              {/* <UploadVideo name title="Upload Video" /> */}
+              <input type="file" name="VideoURL" id={taskNotes} data-id={idx} />
             </button>
             <hr />
             <button>Add Notes</button>

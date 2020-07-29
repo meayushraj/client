@@ -15,16 +15,30 @@ class Form extends React.Component {
         index: Math.random(),
         VideoNumber: "",
         VideoName: "",
+        VideoURL: "",
       },
     ],
     SectionTitle: "",
     count: 0,
   };
 
+  seturl(taskList, data, name) {
+    console.log(data);
+    console.log(name);
+    taskList[data][name] = "video url";
+  }
   handleChange = (e) => {
-    if (["VideoNumber", "VideoName"].includes(e.target.name)) {
+    if (["VideoNumber", "VideoName", "VideoURL"].includes(e.target.name)) {
       let taskList = [...this.state.taskList];
-      taskList[e.target.dataset.id][e.target.name] = e.target.value;
+      if (e.target.name === "VideoURL") {
+        console.log(112344556);
+        // taskList[e.target.dataset.id][e.target.name] = "url here";
+        const data = e.target.dataset.id;
+        const name = e.target.name;
+        this.seturl(taskList, data, name);
+      } else {
+        taskList[e.target.dataset.id][e.target.name] = e.target.value;
+      }
     } else {
       this.setState({ [e.target.name]: e.target.value });
     }
@@ -37,6 +51,7 @@ class Form extends React.Component {
           index: Math.random(),
           VideoNumber: "",
           VideoName: "",
+          VideoURL: "",
         },
       ],
     }));

@@ -1,41 +1,42 @@
-import axios from 'axios'
-import { get } from 'mongoose'
+import axios from "axios";
+import { get } from "mongoose";
 
 //Action to fetch all the courses
 export const FetchCourseAction = () => async (dispatch) => {
-  console.log('all course action called')
-  const response = await axios.get('/user/all-course')
-  console.log(response)
-  dispatch({ type: 'FETCH_COURSES', payload: response.data })
-}
+  console.log("all course action called");
+  const response = await axios.get("/user/all-course");
+  console.log(response);
+  dispatch({ type: "FETCH_COURSES", payload: response.data });
+};
 //Action to fetch courses of a instructor
 export const FetchInstructorCoursesAction = () => async (dispatch) => {
-  const response = await axios.get('')
-  dispatch({ type: 'FETCH_INSTRUCTOR_COURSES', payload: response.data })
-}
+  const response = await axios.get("");
+  dispatch({ type: "FETCH_INSTRUCTOR_COURSES", payload: response.data });
+};
 //Action to add course by the instructor
 export const AddCourseAction = (history) => async (dispatch, getState) => {
-  const sections = getState().Sections
-  const formValues = getState().form.wizard.values
-  const Image = getState().Image[0].data.downloadUrl
-  const currentUsername = getState().Credentials.user.username
-  const currentUserId = getState().Credentials.user.id
-  const currentUser = { currentUsername, currentUserId }
+  const sections = getState().Sections;
+  const formValues = getState().form.wizard.values;
+  const image = getState().Image[0].data.downloadImageUrl;
+  const video = getState().Video.data.downloadVideoUrl;
 
-  console.log(sections)
-  console.log(formValues)
+  const currentUsername = getState().Credentials.user.username;
+  const currentUserId = getState().Credentials.user.id;
+  const currentUser = { currentUsername, currentUserId };
 
-  const course = { ...formValues, sections, currentUser, Image }
-  console.log(Image)
-  console.log(course)
-  const res = await axios.post('/instructor/add-course', course)
-  // history.push("/instructor-dashboard");
-  dispatch({ type: 'ADD_COURSE', payload: res.data })
-}
+  console.log(sections);
+  console.log(formValues);
+
+  const course = { ...formValues, sections, currentUser, image, video };
+  console.log(course);
+  const res = await axios.post("/instructor/add-course", course);
+  history.push("/instructor-dashboard");
+  dispatch({ type: "ADD_COURSE", payload: res.data });
+};
 //This is a basic action which adds a section to the reducers and from the reducers state we got this state in as sections in the AddCourseAction creator
 export const AddSectionAction = (sections) => {
   return {
-    type: 'ADD_SECTION',
+    type: "ADD_SECTION",
     payload: sections,
-  }
-}
+  };
+};
