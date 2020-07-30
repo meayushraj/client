@@ -38,18 +38,20 @@ class WizardFormFourPage extends React.Component {
                 <div>
                   <button
                     class="btn btn-outline-dark mb-24pt mb-sm-0"
-                    onClick={() =>
-                      this.setState({ number: Number(this.state.number) + 1 })
-                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.setState({ number: Number(this.state.number) + 1 });
+                    }}
                   >
                     ADD Another Section
                   </button>
                   <button
                     class="btn btn-outline-dark mb-24pt mb-sm-0"
                     style={{ float: "right" }}
-                    onClick={() =>
-                      this.setState({ number: Number(this.state.number) - 1 })
-                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.setState({ number: Number(this.state.number) - 1 });
+                    }}
                   >
                     Remove Section
                   </button>

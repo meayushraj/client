@@ -1,7 +1,8 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AllCourse extends Component {
+  state = { video: 0 };
   render() {
     return this.props.allcourses.map((course) => {
       return (
@@ -15,15 +16,34 @@ class AllCourse extends Component {
             data-toggle="popover"
             data-trigger="click"
           >
-            <Link to="#" className="js-image" data-position="">
+            <Link
+              to="#"
+              className="js-image"
+              data-position="center"
+              data-height="auto"
+              data-domfactory-upgraded="img"
+            >
               <img
-                src="assets/images/paths/mailchimp_430x168.png"
+                src={course.imageUrl}
                 alt="course"
+                style={{
+                  display: "block",
+                  position: "relative",
+                  overflow: "hidden",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center center",
+                  height: "168px",
+                }}
               />
               <span className="overlay__content align-items-start justify-content-start">
                 <span className="overlay__action card-body d-flex align-items-center">
                   <i className="material-icons mr-4pt">play_circle_outline</i>
-                  <span className="card-title text-white">Preview</span>
+                  <button
+                    className="card-title text-white"
+                    onClick={this.setState({ video: 1 })}
+                  >
+                    Preview
+                  </button>
                 </span>
               </span>
             </Link>
@@ -172,9 +192,9 @@ class AllCourse extends Component {
             </div>
           </div>
         </div>
-      )
-    })
+      );
+    });
   }
 }
 
-export default AllCourse
+export default AllCourse;

@@ -16,31 +16,42 @@ class Form extends React.Component {
         VideoNumber: "",
         VideoName: "",
         VideoURL: "",
+        Status: false,
       },
     ],
     SectionTitle: "",
     count: 0,
+    presentVideo: null,
   };
 
   seturl(taskList, data, name) {
     console.log(data);
     console.log(name);
-    taskList[data][name] = "video url";
+    console.log(this.state.presentVideo);
+    taskList[data][name] = this.state.presentVideo;
+    //add your concept here
   }
   handleChange = (e) => {
-    if (["VideoNumber", "VideoName", "VideoURL"].includes(e.target.name)) {
+    if (
+      ["VideoNumber", "VideoName", "VideoURL", "Status"].includes(e.target.name)
+    ) {
       let taskList = [...this.state.taskList];
-      if (e.target.name === "VideoURL") {
+      if (e.target.name === "Status") {
         console.log(112344556);
         // taskList[e.target.dataset.id][e.target.name] = "url here";
         const data = e.target.dataset.id;
-        const name = e.target.name;
+        const name = "VideoURL";
         this.seturl(taskList, data, name);
       } else {
+        console.log(99999);
         taskList[e.target.dataset.id][e.target.name] = e.target.value;
       }
     } else {
-      this.setState({ [e.target.name]: e.target.value });
+      if (e.target.name === "VideoURL") {
+        this.setState({ presentVideo: this.state.presentVideo });
+      } else {
+        this.setState({ [e.target.name]: e.target.value });
+      }
     }
   };
   addNewRow = (e) => {
@@ -52,6 +63,7 @@ class Form extends React.Component {
           VideoNumber: "",
           VideoName: "",
           VideoURL: "",
+          Status: "",
         },
       ],
     }));
@@ -115,8 +127,23 @@ class Form extends React.Component {
       taskList: this.state.taskList.filter((r) => r !== record),
     });
   }
+  getData = (data) => {
+    console.log(data);
+    this.setState({ presentVideo: data });
+    //this.setState({
+    //   taskList: [
+    //     {
+    //       VideoNumber: this.state.VideoNumber,
+    //       VideoName: this.state.VideoName,
+    //       VideoURL: this.state.presentVideo,
+    //     },
+    //   ],
+    // });
+  };
+
   render() {
     let { taskList } = this.state; //let { notes, date, description, taskList } = this.state
+    console.log(this.state);
     return (
       <div className="content">
         <NotificationContainer />
@@ -150,6 +177,8 @@ class Form extends React.Component {
                         delete={this.clickOnDelete.bind(this)}
                         taskList={taskList}
                         count={this.state.count}
+                        sendData={this.getData}
+                        presentVideo={this.state.presentVideo}
                       />
                     </tbody>
                     <tfoot>

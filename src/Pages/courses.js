@@ -1,26 +1,27 @@
-import React from "react"
-import Header from "../Header/header"
-import Drawer from "../Drawer/drawer"
-import { Link } from "react-router-dom"
-import { FetchCourseAction } from "../Actions/courseActions"
-import { connect } from "react-redux"
-import AllCourse from "./AllCourse"
+import React from "react";
+import Header from "../Header/header";
+import Drawer from "../Drawer/drawer";
+import { Link } from "react-router-dom";
+import { FetchCourseAction } from "../Actions/courseActions";
+import { connect } from "react-redux";
+import AllCourse from "./AllCourse";
 
 class Courses extends React.Component {
   constructor() {
-    super()
-    this.state = {}
+    super();
+    this.state = { video: false, videoUrl: "" };
     // this.rendercourse = this.rendercourse.bind(this)
   }
 
   componentDidMount() {
-    console.log(1234232434)
-    this.props.courses()
+    console.log(1234232434);
+    this.props.courses();
     //this.props.course() is key for action creator FetchCourseAction and it will fetch all the courses.
   }
 
   render() {
-    console.log(this.props.allcourses)
+    console.log(this.state);
+    console.log(this.props.allcourses);
     return (
       <div className="layout-boxed">
         <div
@@ -40,25 +41,6 @@ class Courses extends React.Component {
                   <small className="flex text-muted text-headings text-uppercase mr-3 mb-2 mb-sm-0">
                     Displaying 4 out of 10 courses
                   </small>
-                  <div className="w-auto ml-sm-auto table d-flex align-items-center mb-2 mb-sm-0">
-                    <small className="text-muted text-headings text-uppercase mr-3 d-none d-sm-block">
-                      Sort by
-                    </small>
-
-                    <Link
-                      to="#"
-                      className="sort desc small text-headings text-uppercase"
-                    >
-                      Newest
-                    </Link>
-
-                    <Link
-                      to="#"
-                      className="sort small text-headings text-uppercase ml-2"
-                    >
-                      Popularity
-                    </Link>
-                  </div>
 
                   <Link
                     to="#"
@@ -262,21 +244,138 @@ class Courses extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <AllCourse allcourses={this.props.allcourses} />
+                  {this.rendercourse()}
+                  {this.renderVideo()}
+                  {/* <AllCourse allcourses={this.props.allcourses} /> */}
                 </div>
+                <div className="row"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
+  renderVideo() {
+    if (this.state.video) {
+      return (
+        <div>
+          <video height="200px" width="300px" controls>
+            <source src={this.state.videoUrl} type="video/mp4" />
+          </video>
+        </div>
+      );
+    } else {
+      return <div></div>;
+    }
+  }
+  rendercourse() {
+    console.log(222222222222);
+    console.log(this.props.allcourses[0]);
+    if (this.props.allcourses) {
+      return this.props.allcourses.map((course) => {
+        return (
+          <div className="col-md-6 col-lg-4 col-xl-3 card-group-row__col">
+            <div
+              className="card card-sm card--elevated p-relative o-hidden overlay overlay--primary-dodger-blue js-overlay mdk-reveal js-mdk-reveal card-group-row__card"
+              data-overlay-onload-show
+              data-popover-onload-show
+              data-force-reveal
+              data-partial-height="44"
+              data-toggle="popover"
+              data-trigger="click"
+            >
+              <Link
+                to="#"
+                onClick={(e) => this.setitup(course.videoUrl)}
+                className="js-image"
+                data-position="center"
+                data-height="auto"
+                data-domfactory-upgraded="img"
+              >
+                <img
+                  src={course.imageUrl}
+                  alt="course"
+                  style={{
+                    display: "block",
+                    position: "relative",
+                    overflow: "hidden",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center center",
+                    height: "168px",
+                  }}
+                />
+              </Link>
+
+              <div className="mdk-reveal__content">
+                <div className="card-body">
+                  <div className="d-flex">
+                    <div className="flex">
+                      <Link
+                        className="card-title"
+                        to="boxed-student-course.html"
+                      >
+                        {course.title}
+                      </Link>
+                      <small className="text-50 font-weight-bold mb-4pt">
+                        {course.user.username}
+                      </small>
+                    </div>
+                    <Link
+                      to="boxed-student-course.html"
+                      data-toggle="tooltip"
+                      data-title="Remove Favorite"
+                      data-placement="top"
+                      data-boundary="window"
+                      className="ml-4pt material-icons text-20 card-course__icon-favorite"
+                    >
+                      favorite
+                    </Link>
+                  </div>
+                  <div className="d-flex">
+                    <div className="rating flex">
+                      <span className="rating__item">
+                        <span className="material-icons">star</span>
+                      </span>
+                      <span className="rating__item">
+                        <span className="material-icons">star</span>
+                      </span>
+                      <span className="rating__item">
+                        <span className="material-icons">star</span>
+                      </span>
+                      <span className="rating__item">
+                        <span className="material-icons">star</span>
+                      </span>
+                      <span className="rating__item">
+                        <span className="material-icons">star_border</span>
+                      </span>
+                    </div>
+                    <small className="text-50">6 hours</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      });
+    } else {
+      return <div></div>;
+    }
+  }
+
+  setitup = (a) => {
+    console.log(a);
+    this.setState({ video: !this.state.video });
+    this.setState({ videoUrl: a });
+  };
 }
 
 const mapStateToProps = (state) => {
   return {
-    allcourses: Object.values(state.course.courses)
-  }
-}
+    allcourses: Object.values(state.course.courses),
+  };
+};
 
-export default connect(mapStateToProps, { courses: FetchCourseAction })(Courses)
+export default connect(mapStateToProps, { courses: FetchCourseAction })(
+  Courses
+);

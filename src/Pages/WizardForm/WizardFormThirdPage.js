@@ -86,6 +86,8 @@ class WizardFormThirdPage extends React.Component {
                     // onDone={this.uploadImages}
                   />
                   <br />
+                  <hr />
+                  <hr />
                   <UploadVideo title="Upload Your Preview Video Here" />
                   <br />
                   <button
