@@ -41,6 +41,11 @@ class UploadVideo extends Component {
         if (percent < 100) {
           this.setState({ Uploadpercentage: percent });
         }
+        if (percent === 100) {
+          setTimeout(() => {
+            this.setState({ Uploadpercentage: 0 });
+          }, 10000);
+        }
       },
     };
 
@@ -48,14 +53,15 @@ class UploadVideo extends Component {
     // Send formData object
 
     this.props.UploadVideoAction(formData, options);
+
     //axios.post("/image/file-upload", formData, options).then((res) => {
     //console.log(res);
+    // this.setState({ Uploadpercentage: 100 }, () => {
+    //   setTimeout(() => {
+    //     this.setState({ Uploadpercentage: 0 });
+    //   }, 1000);
+    // });
 
-    this.setState({ Uploadpercentage: 100 }, () => {
-      setTimeout(() => {
-        this.setState({ Uploadpercentage: 0 });
-      }, 1000);
-    });
     //Here give the backend where to upload the files
   };
 
@@ -90,13 +96,13 @@ class UploadVideo extends Component {
         <h3>{this.props.title}</h3>
         <div>
           <input type="file" onChange={this.onFileChange} />
-          {/* {Uploadpercentage > 0 && (
-            // <ProgressBar
-            //   now={Uploadpercentage}
-            //   active
-            //   label={`${Uploadpercentage}%`}
-            // />
-          )} */}
+          {Uploadpercentage > 0 && (
+            <ProgressBar
+              now={Uploadpercentage}
+              active
+              label={`${Uploadpercentage}%`}
+            />
+          )}
           <button
             class="btn btn-outline-dark mb-24pt mb-sm-0 "
             onClick={this.onFileUpload}

@@ -8,6 +8,14 @@ export const FetchCourseAction = () => async (dispatch) => {
   console.log(response);
   dispatch({ type: "FETCH_COURSES", payload: response.data });
 };
+//Action to fetch course by id
+export const FetchCourseByIdAction = (id) => async (dispatch) => {
+  console.log("get action by id");
+  const res = await axios.get(`/instructor/all-course/${id}`);
+  console.log(res);
+  dispatch({ type: "FETCH_COURSEBYID", payload: res.data });
+};
+
 //Action to fetch courses of a instructor
 export const FetchInstructorCoursesAction = () => async (dispatch) => {
   const response = await axios.get("");

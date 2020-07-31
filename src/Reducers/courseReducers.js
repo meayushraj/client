@@ -9,6 +9,8 @@ export const ReducerCourses = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_COURSES":
       return { ...state, courses: action.payload };
+    case "FETCH_COURSEBYID":
+      return { ...state, presentcourse: action.payload };
     case "FETCH_INSTRUCTOR_COURSES":
       return { ...state, ..._.mapKeys(action.payload, "id") };
     case "ADD_COURSE":

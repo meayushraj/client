@@ -24,6 +24,7 @@ import ForgotPassword from "./Pages/forgotpassword";
 import resetpassword from "./Pages/resetpassword";
 import WizardForm from "./Pages/WizardForm/WizardForm";
 import RegMoadl from "./Pages/Modal/RegModal";
+import TakeCourse from "./Pages/Students/takecourse";
 
 if (localStorage.token) {
   // set auth token
@@ -46,6 +47,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/courses" exact component={Courses} />
+          <Route path="/courses/:id" exact component={TakeCourse} />
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SingupPage} />
           <Route path="/forgotpassword" exact component={ForgotPassword} />

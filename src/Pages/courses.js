@@ -271,8 +271,9 @@ class Courses extends React.Component {
   }
   rendercourse() {
     console.log(222222222222);
-    console.log(this.props.allcourses[0]);
+    console.log(this.props.allcourses);
     if (this.props.allcourses) {
+      console.log(this.props.allcourses[0]);
       return this.props.allcourses.map((course) => {
         return (
           <div className="col-md-6 col-lg-4 col-xl-3 card-group-row__col">
@@ -313,16 +314,16 @@ class Courses extends React.Component {
                     <div className="flex">
                       <Link
                         className="card-title"
-                        to="boxed-student-course.html"
+                        to={`/courses/${course._id}`}
                       >
                         {course.title}
                       </Link>
                       <small className="text-50 font-weight-bold mb-4pt">
-                        {course.user.username}
+                        {course.username}
                       </small>
                     </div>
                     <Link
-                      to="boxed-student-course.html"
+                      to={`/courses/${course._id}`}
                       data-toggle="tooltip"
                       data-title="Remove Favorite"
                       data-placement="top"
