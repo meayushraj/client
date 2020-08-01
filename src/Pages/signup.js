@@ -61,6 +61,7 @@ class SignupPage extends React.Component {
 
   render() {
     console.log(111);
+    console.log(this.props);
     return (
       <div className="layout-default layout-login-image">
         <div
@@ -178,6 +179,7 @@ class SignupPage extends React.Component {
                     username={this.state.username}
                     email={this.state.email}
                     password={this.state.password}
+                    history={this.props.history}
                   />
                 </div>
               </div>

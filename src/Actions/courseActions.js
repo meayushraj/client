@@ -1,5 +1,6 @@
 import axios from "axios";
 import { get } from "mongoose";
+import history from "../History";
 
 //Action to fetch all the courses
 export const FetchCourseAction = () => async (dispatch) => {
@@ -23,6 +24,7 @@ export const FetchInstructorCoursesAction = () => async (dispatch) => {
 };
 //Action to add course by the instructor
 export const AddCourseAction = (history) => async (dispatch, getState) => {
+  console.log(history);
   const sections = getState().Sections;
   const formValues = getState().form.wizard.values;
   const image = getState().Image[0].data.downloadImageUrl;
@@ -38,8 +40,9 @@ export const AddCourseAction = (history) => async (dispatch, getState) => {
   const course = { ...formValues, sections, currentUser, image, video };
   console.log(course);
   const res = await axios.post("/instructor/add-course", course);
-  history.push("/instructor-dashboard");
+
   dispatch({ type: "ADD_COURSE", payload: res.data });
+  history.push("/");
 };
 //This is a basic action which adds a section to the reducers and from the reducers state we got this state in as sections in the AddCourseAction creator
 export const AddSectionAction = (sections) => {

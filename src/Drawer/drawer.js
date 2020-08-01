@@ -8,10 +8,7 @@ class Drawer extends React.Component {
     return (
       <div className="mdk-drawer js-mdk-drawer" id="default-drawer">
         <div className="mdk-drawer__content">
-          <div
-            className="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left"
-            data-perfect-scrollbar
-          >
+          <div className="sidebar sidebar-light sidebar-light-dodger-blue sidebar-left">
             <Link
               to="/"
               className="sidebar-brand sidebar-brand-dark bg-primary-pickled-bluewood"

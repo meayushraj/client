@@ -26,6 +26,7 @@ export const setCurrentUser = (decoded) => {
 };
 
 export const SingupAction = (credentials, history) => (dispatch) => {
+  console.log(history);
   axios
     .post("/user/register", credentials)
     .then((res) => history.push("/login"))

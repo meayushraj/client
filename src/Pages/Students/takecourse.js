@@ -45,6 +45,7 @@ class TakeCourse extends React.Component {
       <div class="accordion__menu">
         <ul class="list-unstyled collapse" id={`toc-content-${section._id}`}>
           {section.taskList.map((lecture) => {
+            console.log(lecture.VideoUrl);
             return (
               <li class="accordion__menu-link">
                 <span class="material-icons icon-16pt icon--left text-body">
@@ -52,9 +53,7 @@ class TakeCourse extends React.Component {
                 </span>
                 <a
                   class="flex"
-                  onClick={() =>
-                    this.setState({ video: this.props.presentcourse.videoUrl })
-                  }
+                  onClick={() => this.setState({ video: lecture.VideoURL })}
                 >
                   {lecture.VideoName}
                 </a>
@@ -324,7 +323,7 @@ class TakeCourse extends React.Component {
             <br />
             <div style={{ boxShadow: "3px 2px 3px 2px", padding: "20px" }}>
               <h2>Who all can Take this Course?</h2>
-              <p>{this.props.presentcourse.targetStudents}</p>
+              <p>{this.props.presentcourse.targetStudent}</p>
             </div>
             <br />
             <br />

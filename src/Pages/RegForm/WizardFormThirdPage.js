@@ -1,6 +1,7 @@
 import React from "react";
 import { Field, reduxForm, submit, formValues } from "redux-form";
 import validate from "./validate";
+import { withRouter } from "react-router-dom";
 import { render } from "react-dom";
 import { connect } from "react-redux";
 import { SingupAction } from "../../Actions/actions";
@@ -49,20 +50,7 @@ class WizardFormThirdPage extends React.Component {
           <label class="form-label">Field of Interest</label>
           <Field name="FieldOfInterest" component={renderInterestSelector} />
         </div>
-        <div>
-          <br />
-          <label class="form-label" htmlFor="instructor">
-            Are you a instructor?
-          </label>
-          <div>
-            <Field
-              name="instructor"
-              id="instructor"
-              component="input"
-              type="checkbox"
-            />
-          </div>
-        </div>
+
         <div>
           <br />
           <button

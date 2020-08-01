@@ -1,8 +1,9 @@
 import React, { Fragment } from "react";
 import jwt_decode from "jwt-decode";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Router } from "react-router-dom";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./Actions/actions";
+import history from "./History";
 
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/login";
@@ -25,6 +26,8 @@ import resetpassword from "./Pages/resetpassword";
 import WizardForm from "./Pages/WizardForm/WizardForm";
 import RegMoadl from "./Pages/Modal/RegModal";
 import TakeCourse from "./Pages/Students/takecourse";
+import CoursePreview from "./Pages/Students/course-preview";
+import Cart from "./Pages/Students/cart";
 
 if (localStorage.token) {
   // set auth token
@@ -56,7 +59,7 @@ function App() {
             exact
             component={resetpassword}
           />
-          <Route path="/regmodal" rxact component={RegMoadl} />
+          <Route path="/regmodal" exact component={RegMoadl} />
           {/*Insructor*/}
           <Route
             path="/instructor-dashboard"
@@ -83,6 +86,8 @@ function App() {
           <Route path="/editquiz" exact component={EditQuiz} />
           {/*Student*/}
           <Route path="/student-dashboard" exact component={StudentDasboard} />
+          <Route path="/courses-preview/:id" exact component={CoursePreview} />
+          <Route path="/cart/:id" exact component={Cart} />
         </Switch>
       </BrowserRouter>
     </div>

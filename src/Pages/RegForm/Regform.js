@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import WizardFormFirstPage from "./WizardFormFirstPage";
 import WizardFormSecondPage from "./WizardFormSecondPage";
 import WizardFormThirdPage from "./WizardFormThirdPage";
+import { withRouter } from "react-router-dom";
 
 class RegForm extends Component {
   constructor(props) {
@@ -44,6 +45,7 @@ class RegForm extends Component {
             previousPage={this.previousPage}
             onSubmit={onSubmit}
             newUser={newUser}
+            history={this.props.history}
           />
         )}
       </div>

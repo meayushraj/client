@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, reduxForm, formValues } from "redux-form";
+import { withRouter } from "react-router-dom";
 import validate from "./validate";
 import Form from "../../DynamicInput/form";
 import _ from "lodash";
@@ -27,6 +28,7 @@ class WizardFormFourPage extends React.Component {
   render() {
     const { handleSubmit, pristine, previousPage, submitting } = this.props;
     console.log("yess");
+    console.log(this.props);
     return (
       //   <form onSubmit={handleSubmit}>
       <div class="page-section border-bottom-2">
@@ -87,11 +89,13 @@ const mapStateToProps = (state) => {
   console.log(state);
   return state;
 };
-export default connect(mapStateToProps, { AddCourseAction })(
-  reduxForm({
-    form: "wizard", //Form name is same
-    destroyOnUnmount: false,
-    forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-    validate,
-  })(WizardFormFourPage)
+export default withRouter(
+  connect(mapStateToProps, { AddCourseAction })(
+    reduxForm({
+      form: "wizard", //Form name is same
+      destroyOnUnmount: false,
+      forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+      validate,
+    })(WizardFormFourPage)
+  )
 );

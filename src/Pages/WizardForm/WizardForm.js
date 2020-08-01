@@ -70,6 +70,7 @@ class WizardForm extends Component {
               <WizardFormFourPage
                 previousPage={this.previousPage}
                 onSubmit={onSubmit}
+                history={this.props.history}
                 //onSubmit={this.nextPage}
               />
             )}

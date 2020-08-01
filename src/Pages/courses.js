@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FetchCourseAction } from "../Actions/courseActions";
 import { connect } from "react-redux";
 import AllCourse from "./AllCourse";
+import StudentDrawer from "../Drawer/StudentDrawer";
 
 class Courses extends React.Component {
   constructor() {
@@ -16,6 +17,7 @@ class Courses extends React.Component {
   componentDidMount() {
     console.log(1234232434);
     this.props.courses();
+
     //this.props.course() is key for action creator FetchCourseAction and it will fetch all the courses.
   }
 
@@ -252,6 +254,7 @@ class Courses extends React.Component {
               </div>
             </div>
           </div>
+          <StudentDrawer />
         </div>
       </div>
     );
@@ -314,7 +317,7 @@ class Courses extends React.Component {
                     <div className="flex">
                       <Link
                         className="card-title"
-                        to={`/courses/${course._id}`}
+                        to={`/courses-preview/${course._id}`}
                       >
                         {course.title}
                       </Link>
