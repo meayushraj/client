@@ -38,6 +38,8 @@ class Cart extends React.Component {
     const coursedetails = {
       courseid: this.props.presentcourse._id,
       courseTitle: this.props.presentcourse.title,
+      coverimgUrl: this.props.presentcourse.imageUrl,
+      instructorName: this.props.presentcourse.username,
     };
     console.log(coursedetails);
     const orderdetails = {
