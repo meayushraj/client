@@ -1,7 +1,7 @@
 import React from "react";
 import StudentHeader from "../../Header/student-header";
 import Drawer from "../../Drawer/drawer";
-
+import StudentDrawer from "../../Drawer/StudentDrawer";
 class StudentDashboard extends React.Component {
   constructor() {
     super();
@@ -2006,8 +2006,8 @@ class StudentDashboard extends React.Component {
               </div>
             </div>
           </div>
+          <StudentDrawer />
         </div>
-        <Drawer />
       </div>
     );
   }

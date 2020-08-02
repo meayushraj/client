@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import isEmpty from "../validation/is-empty";
 import _ from "lodash";
 import { reducer as FormReducer } from "redux-form";
-import { ReducerCourses } from "./courseReducers";
+import { ReducerCourses, ReducerUserCourses } from "./courseReducers";
 import { ReducersSection } from "./courseReducers";
 
 const initialState = {
@@ -75,4 +75,5 @@ export default combineReducers({
   Video: VideoReducer,
   UploadReduer: UploadReduer,
   forgetPassword: ForgetPasswordReducer,
+  mycourses: ReducerUserCourses,
 });

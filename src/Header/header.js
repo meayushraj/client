@@ -131,10 +131,7 @@ class Header extends React.Component {
               <Link to="boxed-student-dashboard.html" className="dropdown-item">
                 Student Dashboard
               </Link>
-              <Link
-                to="boxed-student-my-courses.html"
-                className="dropdown-item"
-              >
+              <Link to="/student/mycourses" className="dropdown-item">
                 My Courses
               </Link>
               <Link

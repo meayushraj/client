@@ -278,7 +278,10 @@ class CoursePreview extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { presentcourse: state.course.presentcourse };
+  return {
+    presentcourse: state.course.presentcourse,
+    Credentials: state.Credentials,
+  };
 };
 export default connect(mapStateToProps, { FetchCourseByIdAction })(
   CoursePreview

@@ -32,3 +32,13 @@ export const ReducersSection = (state = [], action) => {
       return state;
   }
 };
+
+export const ReducerUserCourses = (state = {}, action) => {
+  console.log("reducer of my courses");
+  if (action.type === "USER_COURSES") {
+    console.log(action.payload);
+    return { ...state, mycourse: action.payload };
+  } else {
+    return state;
+  }
+};

@@ -60,10 +60,7 @@ class StudentDrawer extends React.Component {
                 </Link>
               </li>
               <li className="sidebar-menu-item">
-                <Link
-                  className="sidebar-menu-button"
-                  to="boxed-student-my-courses.html"
-                >
+                <Link className="sidebar-menu-button" to="/student/mycourses">
                   <span className="material-icons sidebar-menu-icon sidebar-menu-icon--left">
                     search
                   </span>

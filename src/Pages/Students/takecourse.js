@@ -3,7 +3,7 @@ import Header from "../../Header/header";
 import axios from "axios";
 import { connect } from "react-redux";
 import { FetchCourseByIdAction } from "../../Actions/courseActions";
-
+import StudentDrawer from "../../Drawer/StudentDrawer";
 class TakeCourse extends React.Component {
   state = { video: "" };
 
@@ -84,250 +84,319 @@ class TakeCourse extends React.Component {
       return (
         <div>
           <div
-            class="ui items"
-            style={{ backgroundColor: "#303956", padding: "10px" }}
+            class="mdk-box bg-primary js-mdk-box mb-0"
+            data-effects="blend-background"
           >
-            <div class="item">
-              <div class="image">
-                <img
-                  src={this.props.presentcourse.imageUrl}
-                  style={{
-                    borderRadius: "100px",
-                    height: "150px",
-                    width: "150px",
-                  }}
-                />
-              </div>
-
-              <div class="content" style={{ color: "white" }}>
-                <h2 style={{ color: "white" }}>
-                  {this.props.presentcourse.title}
-                </h2>
-                <div className="d-flex">
-                  <div className="rating flex">
-                    <span className="rating__item">
-                      <span className="material-icons">star</span>
-                    </span>
-                    <span className="rating__item">
-                      <span className="material-icons">star</span>
-                    </span>
-                    <span className="rating__item">
-                      <span className="material-icons">star</span>
-                    </span>
-                    <span className="rating__item">
-                      <span className="material-icons">star</span>
-                    </span>
-                    <span className="rating__item">
-                      <span className="material-icons">star_border</span>
-                    </span>
-                  </div>
+            <div class="mdk-box__content">
+              <div class="hero py-64pt text-center text-sm-left">
+                <div class="container-fluid page__container">
+                  <h1 class="text-white">{this.props.presentcourse.title}</h1>
+                  <p class="lead text-white-50 measure-hero-lead">
+                    {this.props.presentcourse.learning}
+                  </p>
+                  <div class="d-flex flex-column flex-sm-row align-items-center justify-content-start"></div>
                 </div>
-                {this.renderfees()}
-                <p>{this.props.presentcourse.learning}</p>
-
-                <p>by--{this.props.presentcourse.username}</p>
-
-                <div class="description"></div>
               </div>
             </div>
           </div>
+          <div class="navbar navbar-expand-sm navbar-light bg-white border-bottom-2 navbar-list p-0 m-0 align-items-center">
+            <div class="container-fluid page__container">
+              <ul class="nav navbar-nav flex align-items-sm-center">
+                <li class="nav-item navbar-list__item">
+                  <div class="media align-items-center">
+                    <span class="media-left mr-16pt">
+                      <img
+                        src="\assets\images\256_rsz_nicolas-horn-689011-unsplash.jpg"
+                        width="40"
+                        alt="avatar"
+                        class="rounded-circle"
+                      />
+                    </span>
+                    <div class="media-body">
+                      <a
+                        class="card-title m-0"
+                        href="boxed-teacher-profile.html"
+                      >
+                        {this.props.presentcourse.username}
+                      </a>
+                      <p class="text-50 lh-1 mb-0">Instructor</p>
+                    </div>
+                  </div>
+                </li>
+                <li class="nav-item navbar-list__item">
+                  <i class="material-icons text-muted icon--left">schedule</i>
+                  2h 46m
+                </li>
+                <li class="nav-item navbar-list__item">
+                  <i class="material-icons text-muted icon--left">assessment</i>
+                  Beginner
+                </li>
+                <li class="nav-item ml-sm-auto text-sm-center flex-column navbar-list__item">
+                  <div class="rating rating-24">
+                    <div class="rating__item">
+                      <i class="material-icons">star</i>
+                    </div>
+                    <div class="rating__item">
+                      <i class="material-icons">star</i>
+                    </div>
+                    <div class="rating__item">
+                      <i class="material-icons">star</i>
+                    </div>
+                    <div class="rating__item">
+                      <i class="material-icons">star</i>
+                    </div>
+                    <div class="rating__item">
+                      <i class="material-icons">star_border</i>
+                    </div>
+                  </div>
+                  <p class="lh-1 mb-0">
+                    <small class="text-muted">20 ratings</small>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <br />
+          <br />
 
           <div class="ui two column very relaxed grid">
-            <div class="column" style={{ width: "600px" }}>
+            <div class="column" style={{ width: "600px", margin: "20px" }}>
               <h1>{this.props.presentcourse.title}</h1>
-              <h3>Course Material</h3>
+              <div class="page-separator">
+                <div class="page-separator__text">Table of Contents</div>
+              </div>
               {this.renderSections()}
               <hr />
             </div>
             <div className="column">{this.rendervideo(this.state.video)}</div>
-          </div>
-          <hr />
-          <hr />
-          <div className="container">
-            <div class="ui comments">
-              <h2 class="ui dividing header">Comments and Reviews</h2>
-              <div class="comment">
-                <a class="avatar">
-                  <img
-                    src="\assets\images\256_daniel-gaffey-1060698-unsplash.jpg"
-                    style={{ borderRadius: "50px" }}
-                  />
-                </a>
-                <div class="content">
-                  <a class="author">Matt</a>
-                  <div className="d-flex">
-                    <div className="rating flex">
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star_border</span>
-                      </span>
+
+            <hr />
+            <hr />
+            <div className="container">
+              <div class="ui comments">
+                <h2 class="ui dividing header">Comments and Reviews</h2>
+                <div class="comment">
+                  <a class="avatar">
+                    <img
+                      src="\assets\images\256_daniel-gaffey-1060698-unsplash.jpg"
+                      style={{ borderRadius: "50px" }}
+                    />
+                  </a>
+                  <div class="content">
+                    <a class="author">Matt</a>
+                    <div className="d-flex">
+                      <div className="rating flex">
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star_border</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="metadata">
+                      <span class="date">Today at 5:42PM</span>
+                    </div>
+                    <div class="text">How artistic!</div>
+                    <div class="actions">
+                      <a class="reply">Reply</a>
                     </div>
                   </div>
-                  <div class="metadata">
-                    <span class="date">Today at 5:42PM</span>
-                  </div>
-                  <div class="text">How artistic!</div>
-                  <div class="actions">
-                    <a class="reply">Reply</a>
-                  </div>
                 </div>
-              </div>
-              <div class="comment">
-                <a class="avatar">
-                  <img
-                    src="\assets\images\256_jeremy-banks-798787-unsplash.jpg"
-                    style={{ borderRadius: "50px" }}
-                  />
-                </a>
-                <div class="content">
-                  <a class="author">Elliot Fu</a>
-                  <div className="d-flex">
-                    <div className="rating flex">
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star_border</span>
-                      </span>
+                <div class="comment">
+                  <a class="avatar">
+                    <img
+                      src="\assets\images\256_jeremy-banks-798787-unsplash.jpg"
+                      style={{ borderRadius: "50px" }}
+                    />
+                  </a>
+                  <div class="content">
+                    <a class="author">Elliot Fu</a>
+                    <div className="d-flex">
+                      <div className="rating flex">
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star_border</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="metadata">
+                      <span class="date">Yesterday at 12:30AM</span>
+                    </div>
+                    <div class="text">
+                      <p>
+                        This has been very useful for my research. Thanks as
+                        well!
+                      </p>
+                    </div>
+                    <div class="actions">
+                      <a class="reply">Reply</a>
                     </div>
                   </div>
-                  <div class="metadata">
-                    <span class="date">Yesterday at 12:30AM</span>
-                  </div>
-                  <div class="text">
-                    <p>
-                      This has been very useful for my research. Thanks as well!
-                    </p>
-                  </div>
-                  <div class="actions">
-                    <a class="reply">Reply</a>
-                  </div>
-                </div>
-                <div class="comments">
-                  <div class="comment">
-                    <a class="avatar">
-                      <img
-                        src="\assets\images\256_luke-porter-261779-unsplash.jpg"
-                        style={{ borderRadius: "50px" }}
-                      />
-                    </a>
-                    <div class="content">
-                      <a class="author">Jenny Hess</a>
-                      <div className="d-flex">
-                        <div className="rating flex">
-                          <span className="rating__item">
-                            <span className="material-icons">star</span>
-                          </span>
-                          <span className="rating__item">
-                            <span className="material-icons">star</span>
-                          </span>
-                          <span className="rating__item">
-                            <span className="material-icons">star</span>
-                          </span>
-                          <span className="rating__item">
-                            <span className="material-icons">star</span>
-                          </span>
-                          <span className="rating__item">
-                            <span className="material-icons">star_border</span>
-                          </span>
+                  <div class="comments">
+                    <div class="comment">
+                      <a class="avatar">
+                        <img
+                          src="\assets\images\256_luke-porter-261779-unsplash.jpg"
+                          style={{ borderRadius: "50px" }}
+                        />
+                      </a>
+                      <div class="content">
+                        <a class="author">Jenny Hess</a>
+                        <div className="d-flex">
+                          <div className="rating flex">
+                            <span className="rating__item">
+                              <span className="material-icons">star</span>
+                            </span>
+                            <span className="rating__item">
+                              <span className="material-icons">star</span>
+                            </span>
+                            <span className="rating__item">
+                              <span className="material-icons">star</span>
+                            </span>
+                            <span className="rating__item">
+                              <span className="material-icons">star</span>
+                            </span>
+                            <span className="rating__item">
+                              <span className="material-icons">
+                                star_border
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="metadata">
+                          <span class="date">Just now</span>
+                        </div>
+                        <div class="text">
+                          Elliot you are always so right :)
+                        </div>
+                        <div class="actions">
+                          <a class="reply">Reply</a>
                         </div>
                       </div>
-                      <div class="metadata">
-                        <span class="date">Just now</span>
-                      </div>
-                      <div class="text">Elliot you are always so right :)</div>
-                      <div class="actions">
-                        <a class="reply">Reply</a>
-                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="comment">
-                <a class="avatar">
-                  <img
-                    src="\assets\images\256_rsz_1andy-lee-642320-unsplash.jpg"
-                    style={{ borderRadius: "50px" }}
-                  />
-                </a>
-                <div class="content">
-                  <a class="author">Joe Henderson</a>
-                  <div className="d-flex">
-                    <div className="rating flex">
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star</span>
-                      </span>
-                      <span className="rating__item">
-                        <span className="material-icons">star_border</span>
-                      </span>
+                <div class="comment">
+                  <a class="avatar">
+                    <img
+                      src="\assets\images\256_rsz_1andy-lee-642320-unsplash.jpg"
+                      style={{ borderRadius: "50px" }}
+                    />
+                  </a>
+                  <div class="content">
+                    <a class="author">Joe Henderson</a>
+                    <div className="d-flex">
+                      <div className="rating flex">
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star</span>
+                        </span>
+                        <span className="rating__item">
+                          <span className="material-icons">star_border</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="metadata">
+                      <span class="date">5 days ago</span>
+                    </div>
+                    <div class="text">
+                      Dude, this is awesome. Thanks so much
+                    </div>
+                    <div class="actions">
+                      <a class="reply">Reply</a>
                     </div>
                   </div>
-                  <div class="metadata">
-                    <span class="date">5 days ago</span>
-                  </div>
-                  <div class="text">Dude, this is awesome. Thanks so much</div>
-                  <div class="actions">
-                    <a class="reply">Reply</a>
-                  </div>
                 </div>
+                <form class="ui reply form">
+                  <div class="field">
+                    <textarea></textarea>
+                  </div>
+                  <div class="ui blue labeled submit icon button">
+                    <i class="icon edit"></i> Add Reply
+                  </div>
+                  <br />
+                  <hr />
+                  <hr />
+                </form>
               </div>
-              <form class="ui reply form">
-                <div class="field">
-                  <textarea></textarea>
-                </div>
-                <div class="ui blue labeled submit icon button">
-                  <i class="icon edit"></i> Add Reply
-                </div>
-              </form>
             </div>
-            <div style={{ boxShadow: "3px 2px 3px 2px", padding: "20px" }}>
-              <h2>Discription</h2>
-              <p>{this.props.presentcourse.description}</p>
-            </div>
-            <br />
-            <br />
-            <div style={{ boxShadow: "3px 2px 3px 2px", padding: "20px" }}>
-              <h2>Prerequisites of this course</h2>
-              <p>{this.props.presentcourse.prerequisites}</p>
-            </div>
-            <br />
-            <br />
-            <div style={{ boxShadow: "3px 2px 3px 2px", padding: "20px" }}>
-              <h2>Who all can Take this Course?</h2>
-              <p>{this.props.presentcourse.targetStudent}</p>
-            </div>
-            <br />
             <br />
           </div>
+          <div class="page-section bg-white border-bottom-2">
+            <div class="container-fluid page__container">
+              <div class="row ">
+                <div class="col-md-7">
+                  <div class="page-separator">
+                    <div class="page-separator__text">About this course</div>
+                  </div>
+                  <p style={{ fontSize: "15px" }}>
+                    {this.props.presentcourse.description}
+                  </p>
+                </div>
+                <div class="col-md-5">
+                  <div class="page-separator">
+                    <div class="page-separator__text bg-white">
+                      What you’ll learn
+                    </div>
+                  </div>
+                  <p style={{ fontSize: "15px" }}>
+                    {this.props.presentcourse.learning}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="page-section bg-white border-bottom-2">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-7 mb-24pt mb-md-0">
+                  <h4>About the author</h4>
+                  <p>{this.props.presentcourse.username}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* <div class="page-section bg-white border-bottom-2">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-7 mb-24pt mb-md-0">
+                    <h4>About the author</h4>
+                    <p>{this.props.presentcourse.username}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
         </div>
       );
     } else {
@@ -346,9 +415,10 @@ class TakeCourse extends React.Component {
         >
           <div className="mdk-drawer-layout__content page-content">
             <Header />
+            {this.rendercourse()}
           </div>
+          {/* <StudentDrawer /> */}
         </div>
-        <div className="ui segment">{this.rendercourse()}</div>
       </div>
     );
   }

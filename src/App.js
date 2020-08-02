@@ -28,6 +28,7 @@ import RegMoadl from "./Pages/Modal/RegModal";
 import TakeCourse from "./Pages/Students/takecourse";
 import CoursePreview from "./Pages/Students/course-preview";
 import Cart from "./Pages/Students/cart";
+import MyCourses from "./Pages/Students/mycourses";
 
 if (localStorage.token) {
   // set auth token
@@ -88,6 +89,7 @@ function App() {
           <Route path="/student-dashboard" exact component={StudentDasboard} />
           <Route path="/courses-preview/:id" exact component={CoursePreview} />
           <Route path="/cart/:id" exact component={Cart} />
+          <Route path="/student/mycourses" exact component={MyCourses} />
         </Switch>
       </BrowserRouter>
     </div>
