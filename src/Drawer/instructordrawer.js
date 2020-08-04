@@ -53,7 +53,7 @@ class InsDrawer extends React.Component {
               <li className="sidebar-menu-item">
                 <Link
                   className="sidebar-menu-button"
-                  to="boxed-instructor-courses.html"
+                  to="/instructor/managecourse"
                 >
                   <span className="material-icons sidebar-menu-icon sidebar-menu-icon--left">
                     import_contacts

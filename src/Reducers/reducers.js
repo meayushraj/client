@@ -65,7 +65,13 @@ const VideoReducer = (state = {}, action) => {
     return state;
   }
 };
-
+const FetchInsCourseReducer = (state = {}, action) => {
+  if (action.type === "FETCH_INS_COURSES") {
+    return { ...state, instructorcourse: action.payload };
+  } else {
+    return state;
+  }
+};
 export default combineReducers({
   Credentials: ReducerAuthenticate,
   course: ReducerCourses,
@@ -76,4 +82,5 @@ export default combineReducers({
   UploadReduer: UploadReduer,
   forgetPassword: ForgetPasswordReducer,
   mycourses: ReducerUserCourses,
+  instructorcourse: FetchInsCourseReducer,
 });

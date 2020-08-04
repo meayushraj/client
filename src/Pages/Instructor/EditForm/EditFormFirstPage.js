@@ -1,10 +1,8 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
 import { renderField, renderTextArea } from "./renderField";
-import UploadVideo from "../../Upload/uploadvideo";
 
-const WizardFormFirstPage = (props) => {
+const EditFormFirstPage = (props) => {
   const { handleSubmit } = props;
   return (
     <div class="page-section border-bottom-2">
@@ -19,7 +17,7 @@ const WizardFormFirstPage = (props) => {
                 name="title"
                 type="text"
                 component={renderField}
-                label="Title"
+                label="You can Change Your Title here"
               />
               <br />
 
@@ -27,7 +25,7 @@ const WizardFormFirstPage = (props) => {
                 name="description"
                 type="textarea"
                 component={renderTextArea}
-                label="Short Discription"
+                label="You can Change Your Description here"
               />
               <div>
                 <br />
@@ -48,8 +46,7 @@ const WizardFormFirstPage = (props) => {
 };
 
 export default reduxForm({
-  form: "wizard", // <------ same form name
+  form: "editcourse", // <------ same form name
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-  validate,
-})(WizardFormFirstPage);
+})(EditFormFirstPage);

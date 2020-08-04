@@ -136,3 +136,9 @@ export const UploadVideoAction = (formData, options) => (dispatch) => {
 //     // })
 //   }
 // }
+
+export const FetchInstructorCourseByInstructorId = (id) => async (dispatch) => {
+  const res = await axios.get(`/instructor/manage-course/${id}`);
+  console.log(res.data);
+  dispatch({ type: "FETCH_INS_COURSES", payload: res.data });
+};

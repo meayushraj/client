@@ -1,12 +1,11 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import validate from "./validate";
 import { renderField } from "./renderField";
 
 const renderError = ({ meta: { touched, error } }) =>
   touched && error ? <span>{error}</span> : false;
 
-const WizardFormSecondPage = (props) => {
+const EditFormSecondPage = (props) => {
   const { handleSubmit, previousPage } = props;
   return (
     <div class="page-section border-bottom-2">
@@ -66,8 +65,7 @@ const WizardFormSecondPage = (props) => {
 };
 
 export default reduxForm({
-  form: "wizard", //Form name is same
+  form: "editcourse", //Form name is same
   destroyOnUnmount: false,
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-  validate,
-})(WizardFormSecondPage);
+})(EditFormSecondPage);

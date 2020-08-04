@@ -1,30 +1,43 @@
 import React from "react";
 import { Field, reduxForm, formValues } from "redux-form";
 import { withRouter } from "react-router-dom";
-import validate from "./validate";
-import Form from "../../DynamicInput/form";
+import Form from "./Form";
+
 import _ from "lodash";
 import { connect } from "react-redux";
-import { AddCourseAction } from "../../Actions/courseActions";
-import UploadImageVaishnav from "../../Upload/UploadImageVaishnav";
 
-class WizardFormFourPage extends React.Component {
-  constructor() {
-    super();
-    this.state = { number: 1 };
+class EditFormFourPage extends React.Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props.presentcourse.sections.length);
+    this.state = { number: this.props.presentcourse.sections.length, num: 0 };
   }
-  renderform() {
+  renderform = () => {
+    return this.props.presentcourse.sections.map((section) => {
+      return (
+        <div>
+          <Form sections={section} />
+        </div>
+      );
+      // <div>
+      //   {_.times(this.state.number, () => (
+      //     <Form sections={this.props.presentcourse.sections[this.state.num]} />
+      //   ))}
+      // </div>
+    });
+  };
+  renderextraform = () => {
     return (
       <div>
-        {_.times(this.state.number, () => (
+        {_.times(this.state.num, () => (
           <Form />
         ))}
       </div>
     );
-  }
-  onsubmit = () => {
-    this.props.AddCourseAction(this.props.history);
   };
+  // onsubmit = () => {
+  //   this.props.AddCourseAction(this.props.history);
+  // };
   render() {
     const { handleSubmit, pristine, previousPage, submitting } = this.props;
     console.log("yess");
@@ -37,12 +50,13 @@ class WizardFormFourPage extends React.Component {
             <div class="col-md">
               <form onSubmit={this.props.handleSubmit(this.props.onsubmit)}>
                 {this.renderform()}
+                {this.renderextraform()}
                 <div>
                   <button
                     class="btn btn-outline-dark mb-24pt mb-sm-0"
                     onClick={(e) => {
                       e.preventDefault();
-                      this.setState({ number: Number(this.state.number) + 1 });
+                      this.setState({ num: Number(this.state.num) + 1 });
                     }}
                   >
                     ADD Another Section
@@ -90,12 +104,11 @@ const mapStateToProps = (state) => {
   return state;
 };
 export default withRouter(
-  connect(mapStateToProps, { AddCourseAction })(
+  connect(mapStateToProps)(
     reduxForm({
-      form: "wizard", //Form name is same
+      form: "editcourse", //Form name is same
       destroyOnUnmount: false,
       forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-      validate,
-    })(WizardFormFourPage)
+    })(EditFormFourPage)
   )
 );

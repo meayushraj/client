@@ -51,3 +51,35 @@ export const AddSectionAction = (sections) => {
     payload: sections,
   };
 };
+
+export const EditCourseAction = (history, id) => async (dispatch, getState) => {
+  const sections = getState().Sections;
+  const formValues = getState().form.editcourse.values;
+  console.log(sections);
+  console.log(formValues);
+  var course = { ...formValues, sections };
+  if (!getState().Image[0]) {
+    console.log("No new Image");
+  } else {
+    console.log("new Image");
+    const image = getState().Image[0].data.downloadImageUrl;
+    course = { ...course, image };
+  }
+  if (!getState().Video.data) {
+    console.log("No new Video added");
+  } else {
+    console.log("New Video Added");
+    const video = getState().Video.data.downloadVideoUrl;
+    course = { ...course, video };
+  }
+  console.log(course);
+  const res = await axios.put(`/instructor/all-course/${id}`, course); //give edit course route here
+  dispatch({ type: "EDIT_COURSE", payload: res.data });
+  history.push("/instructor-dashboard");
+};
+
+export const DeleteAction = (id) => async (dispatch) => {
+  const res = await axios.delete(`/instructor/all-course/${id}`);
+  dispatch({ type: "DEL_STREAM", payload: id });
+  history.push("/");
+};

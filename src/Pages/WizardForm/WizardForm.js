@@ -11,7 +11,7 @@ import InsDrawer from "../../Drawer/instructordrawer";
 import WizDrawer from "./wizDrawer";
 import { connect } from "react-redux";
 import { AddCourseAction } from "../../Actions/courseActions";
-
+import { reduxForm } from "redux-form";
 class WizardForm extends Component {
   constructor(props) {
     super(props);
@@ -39,6 +39,9 @@ class WizardForm extends Component {
     this.setState({ page: pagenumber });
   };
 
+  onSubmit = () => {
+    this.props.AddCourseAction(this.props.history);
+  };
   render() {
     const { onSubmit } = this.props;
     const { page } = this.state;
@@ -69,7 +72,7 @@ class WizardForm extends Component {
             {page === 4 && (
               <WizardFormFourPage
                 previousPage={this.previousPage}
-                onSubmit={onSubmit}
+                onsubmit={this.onSubmit}
                 history={this.props.history}
                 //onSubmit={this.nextPage}
               />
@@ -89,4 +92,10 @@ WizardForm.propTypes = {
 const mapStateToProps = (state) => ({
   Credentials: state.Credentials,
 });
-export default connect(mapStateToProps)(WizardForm);
+export default connect(mapStateToProps, { AddCourseAction })(
+  reduxForm({
+    form: "wizard", // <------ same form name
+    destroyOnUnmount: false, // <------ preserve form data
+    forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
+  })(WizardForm)
+);

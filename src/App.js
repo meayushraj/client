@@ -29,6 +29,9 @@ import TakeCourse from "./Pages/Students/takecourse";
 import CoursePreview from "./Pages/Students/course-preview";
 import Cart from "./Pages/Students/cart";
 import MyCourses from "./Pages/Students/mycourses";
+import EditPage from "./Pages/Instructor/EditForm/editpage";
+import Delete from "./Pages/Instructor/Delete";
+import ManageCourse from "./Pages/Instructor/ManageCourse";
 
 if (localStorage.token) {
   // set auth token
@@ -85,6 +88,13 @@ function App() {
           <Route path="/instructor-add-course" exact component={WizardForm} />
           <Route path="/quizes" exact component={Quizes} />
           <Route path="/editquiz" exact component={EditQuiz} />
+          <Route path="/instructor/edit/:id" exact component={EditPage} />
+          <Route path="/instructor/delete/:id" exact component={Delete} />
+          <Route
+            path="/instructor/managecourse"
+            exact
+            component={ManageCourse}
+          />
           {/*Student*/}
           <Route path="/student-dashboard" exact component={StudentDasboard} />
           <Route path="/courses-preview/:id" exact component={CoursePreview} />
