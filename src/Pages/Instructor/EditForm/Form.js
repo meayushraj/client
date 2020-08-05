@@ -31,7 +31,7 @@ class Form extends React.Component {
       this.state = {
         taskList: this.props.sections.taskList,
         //taskList: [],
-        SectionTitle: "",
+        SectionTitle: this.props.sections.SectionTitle,
         count: 0,
         presentVideo: null,
       };
@@ -199,7 +199,7 @@ class Form extends React.Component {
           type="text"
           name="SectionTitle"
           id="SectionTitle"
-          value={this.props.sections.SectionTitle}
+          defaultValue={this.props.sections.SectionTitle}
           className="form-control"
           placeholder="Enter Section Title"
         />

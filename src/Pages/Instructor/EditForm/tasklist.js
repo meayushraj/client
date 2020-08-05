@@ -227,7 +227,7 @@ class TaskList extends React.Component {
                   name="VideoNumber"
                   data-id={idx}
                   id={projectName}
-                  value={taska.VideoNumber}
+                  defaultValue={taska.VideoNumber}
                   placeholder="Video Number"
                   className="form-control "
                   style={{ width: "70px" }}
@@ -239,7 +239,7 @@ class TaskList extends React.Component {
                   name="VideoName"
                   id={task}
                   data-id={idx}
-                  value={taska.VideoName}
+                  defaultValue={taska.VideoName}
                   className="form-control "
                   placeholder="Video Name"
                   style={{ width: "250px" }}
@@ -290,6 +290,7 @@ class TaskList extends React.Component {
                 <input
                   type="checkbox"
                   name="Status"
+                  checked={true}
                   //value={this.state.value}
                   //checked={this.state.checked}
                   id={taskStatus}

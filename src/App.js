@@ -32,6 +32,8 @@ import MyCourses from "./Pages/Students/mycourses";
 import EditPage from "./Pages/Instructor/EditForm/editpage";
 import Delete from "./Pages/Instructor/Delete";
 import ManageCourse from "./Pages/Instructor/ManageCourse";
+import AdminDash from "./Pages/Admin/AdminDash";
+import AdminLogin from "./Pages/Admin/AdminLogin";
 
 if (localStorage.token) {
   // set auth token
@@ -52,6 +54,11 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
+          {/* ADMIN */}
+          <Route path="/admin/dashboard" exact component={AdminDash} />
+          <Route path="/admin/login" exact component={AdminLogin} />
+
+          {/* ADMIN */}
           <Route path="/" exact component={HomePage} />
           <Route path="/courses" exact component={Courses} />
           <Route path="/courses/:id" exact component={TakeCourse} />

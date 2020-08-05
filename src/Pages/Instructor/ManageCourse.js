@@ -98,7 +98,20 @@ class ManageCourse extends React.Component {
                 </div>
                 <br />
                 <Link to={`/instructor/edit/${course._id}`}>
-                  <button className="ui green button">EDIT</button>
+                  <button
+                    className="ui green button"
+                    style={{ margin: "10px" }}
+                  >
+                    EDIT
+                  </button>
+                </Link>
+                <Link to={`/instructor/delete/${course._id}`}>
+                  <button
+                    className="ui red button"
+                    style={{ float: "right", margin: "10px" }}
+                  >
+                    DELETE
+                  </button>
                 </Link>
               </div>
             </div>
