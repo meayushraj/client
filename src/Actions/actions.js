@@ -18,6 +18,24 @@ export const LoginAction = (credentials) => (dispatch) => {
     .catch((err) => console.log(err));
 };
 
+//admin login action
+export const AdminLoginAction = (credentials, history) => (dispatch) => {
+  axios
+    .post("/admin/login", credentials)
+    .then((res) => {
+      const { token } = res.data;
+      //set token to ls
+      localStorage.setItem("token", token);
+      //set token to auth heder
+      setAuthToken(token);
+      //decode the token
+      const decoded = jwt_decode(token);
+      dispatch(setCurrentUser(decoded));
+      history.push("/admin/dashboard");
+    })
+    .catch((err) => console.log(err));
+};
+
 export const setCurrentUser = (decoded) => {
   return {
     type: "SET_CURRENT_USER",

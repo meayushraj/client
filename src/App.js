@@ -34,6 +34,11 @@ import Delete from "./Pages/Instructor/Delete";
 import ManageCourse from "./Pages/Instructor/ManageCourse";
 import AdminDash from "./Pages/Admin/AdminDash";
 import AdminLogin from "./Pages/Admin/AdminLogin";
+import AdminAddCourseForm from "./Pages/Admin/AddCourse";
+import AdminManageCourse from "./Pages/Admin/ManageCourses";
+import AdminEditPage from "./Pages/Admin/EditCourse";
+import AdminDelete from "./Pages/Admin/DeleteCourse";
+import TakeLesson from "./Pages/Students/takelesson";
 
 if (localStorage.token) {
   // set auth token
@@ -57,11 +62,19 @@ function App() {
           {/* ADMIN */}
           <Route path="/admin/dashboard" exact component={AdminDash} />
           <Route path="/admin/login" exact component={AdminLogin} />
+          <Route path="/admin/addcourse" exact component={AdminAddCourseForm} />
+          <Route
+            path="/admin/managecourse"
+            exact
+            component={AdminManageCourse}
+          />
+          <Route path="/admin/editcourse/:id" exact component={AdminEditPage} />
+          <Route path="/admin/deletecourse/:id" exact component={AdminDelete} />
 
           {/* ADMIN */}
           <Route path="/" exact component={HomePage} />
           <Route path="/courses" exact component={Courses} />
-          <Route path="/courses/:id" exact component={TakeCourse} />
+
           <Route path="/login" exact component={LoginPage} />
           <Route path="/signup" exact component={SingupPage} />
           <Route path="/forgotpassword" exact component={ForgotPassword} />
@@ -107,6 +120,8 @@ function App() {
           <Route path="/courses-preview/:id" exact component={CoursePreview} />
           <Route path="/cart/:id" exact component={Cart} />
           <Route path="/student/mycourses" exact component={MyCourses} />
+          <Route path="/courses/:id" exact component={TakeCourse} />
+          <Route path="/student/takelesson/:id" exact component={TakeLesson} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -326,7 +326,7 @@ class Courses extends React.Component {
                       </small>
                     </div>
                     <Link
-                      to={`/courses/${course._id}`}
+                      to={`/courses-preview/${course._id}`}
                       data-toggle="tooltip"
                       data-title="Remove Favorite"
                       data-placement="top"

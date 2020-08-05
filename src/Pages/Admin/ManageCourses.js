@@ -2,11 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { Credentials } from "aws-sdk";
 import { FetchInstructorCourseByInstructorId } from "../../Actions/actions";
-import InsDrawer from "../../Drawer/instructordrawer";
+//import InsDrawer from "../../Drawer/instructordrawer";
+import AdminDrawer from "./AdminDrawer";
+
 import Header from "../../Header/header";
 import { Link } from "react-router-dom";
 
-class ManageCourse extends React.Component {
+class AdminManageCourse extends React.Component {
   componentDidMount() {
     if (!this.props.id) {
       this.props.history.push("/");
@@ -56,7 +58,7 @@ class ManageCourse extends React.Component {
                     <div className="flex">
                       <Link
                         className="card-title"
-                        to={`/courses/${course._id}`}
+                        to={`/courses-preview/${course._id}`}
                       >
                         {course.title}
                       </Link>
@@ -97,7 +99,7 @@ class ManageCourse extends React.Component {
                   </div>
                 </div>
                 <br />
-                <Link to={`/instructor/edit/${course._id}`}>
+                <Link to={`/admin/editcourse/${course._id}`}>
                   <button
                     className="ui green button"
                     style={{ margin: "10px" }}
@@ -160,7 +162,7 @@ class ManageCourse extends React.Component {
               </div>
             </div>
           </div>
-          <InsDrawer />
+          <AdminDrawer />
         </div>
       </div>
     );
@@ -175,4 +177,4 @@ const mapStateToProps = (state) => {
 };
 export default connect(mapStateToProps, {
   FetchInstructorCourseByInstructorId,
-})(ManageCourse);
+})(AdminManageCourse);

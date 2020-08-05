@@ -4,17 +4,14 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { FetchCourseByIdAction } from "../../Actions/courseActions";
 import StudentDrawer from "../../Drawer/StudentDrawer";
-class TakeCourse extends React.Component {
-  state = { video: "", completedvideo: {}, done: 0 };
+import { Link } from "react-router-dom";
+
+class TakeLesson extends React.Component {
+  state = { video: "" };
 
   componentDidMount() {
     this.props.FetchCourseByIdAction(this.props.match.params.id);
     console.log(this.props);
-  }
-  componentDidUpdate() {
-    document.getElementById("video").addEventListener("ended", (e) => {
-      this.setState({ done: 1 });
-    });
   }
 
   renderSections() {
@@ -69,13 +66,14 @@ class TakeCourse extends React.Component {
       </div>
     );
   }
-  rendertick() {}
   rendervideo = (url) => {
     console.log(111);
     return (
-      <video height="500" width="900" src={url} controls id="video">
-        {/* <source src={url} type="video/mp4" /> */}
-      </video>
+      <div>
+        <video height="500" width="900" src={url} controls>
+          {/* <source src={url} type="video/mp4" /> */}
+        </video>
+      </div>
     );
   };
   renderfees = () => {
@@ -166,7 +164,10 @@ class TakeCourse extends React.Component {
           <br />
 
           <div class="ui two column very relaxed grid">
-            <div class="column" style={{ width: "600px", margin: "20px" }}>
+            <div
+              class="column"
+              style={{ width: "600px", margin: "20px", marginLeft: "100px" }}
+            >
               <h1>{this.props.presentcourse.title}</h1>
               <div class="page-separator">
                 <div class="page-separator__text">Table of Contents</div>
@@ -174,11 +175,23 @@ class TakeCourse extends React.Component {
               {this.renderSections()}
               <hr />
             </div>
-            <div className="column">{this.rendervideo(this.state.video)}</div>
+            <div
+              className="column"
+              style={{ marginTop: "100px", float: "left" }}
+            >
+              <Link
+                to={`/courses/${this.props.presentcourse._id}`}
+                style={{ float: "right" }}
+              >
+                <button className="ui massive blue button">
+                  RESUME COURSE
+                </button>
+              </Link>
+            </div>
 
             <hr />
             <hr />
-            <div className="container">
+            {/* <div className="container">
               <div class="ui comments">
                 <h2 class="ui dividing header">Comments and Reviews</h2>
                 <div class="comment">
@@ -354,7 +367,7 @@ class TakeCourse extends React.Component {
                   <hr />
                 </form>
               </div>
-            </div>
+            </div> */}
             <br />
           </div>
           <div class="page-section bg-white border-bottom-2">
@@ -384,10 +397,10 @@ class TakeCourse extends React.Component {
           <div class="page-section bg-white border-bottom-2">
             <div class="container">
               <div class="row">
-                <div class="col-md-7 mb-24pt mb-md-0">
+                {/* <div class="col-md-7 mb-24pt mb-md-0">
                   <h4>About the author</h4>
                   <p>{this.props.presentcourse.username}</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -432,4 +445,4 @@ class TakeCourse extends React.Component {
 const mapStateToProps = (state) => {
   return { presentcourse: state.course.presentcourse };
 };
-export default connect(mapStateToProps, { FetchCourseByIdAction })(TakeCourse);
+export default connect(mapStateToProps, { FetchCourseByIdAction })(TakeLesson);

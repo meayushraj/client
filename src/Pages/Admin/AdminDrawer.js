@@ -29,19 +29,13 @@ class AdminDrawer extends React.Component {
             <div className="sidebar-heading">Admin</div>
             <ul className="sidebar-menu">
               <li className="sidebar-menu-item">
-                <Link
-                  className="sidebar-menu-button"
-                  to="/instructor-add-course"
-                >
+                <Link className="sidebar-menu-button" to="/admin/addcourse">
                   <span className="material-icons sidebar-menu-icon sidebar-menu-icon--left">
                     school
                   </span>
                   <span className="sidebar-menu-text">Add Course</span>
                 </Link>
-                <Link
-                  className="sidebar-menu-button"
-                  to="boxed-instructor-dashboard.html"
-                >
+                <Link className="sidebar-menu-button" to="/admin/dashboard">
                   <span className="material-icons sidebar-menu-icon sidebar-menu-icon--left">
                     school
                   </span>
@@ -49,10 +43,7 @@ class AdminDrawer extends React.Component {
                 </Link>
               </li>
               <li className="sidebar-menu-item">
-                <Link
-                  className="sidebar-menu-button"
-                  to="/instructor/managecourse"
-                >
+                <Link className="sidebar-menu-button" to="/admin/managecourse">
                   <span className="material-icons sidebar-menu-icon sidebar-menu-icon--left">
                     import_contacts
                   </span>

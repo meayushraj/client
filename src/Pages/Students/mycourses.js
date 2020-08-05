@@ -56,7 +56,7 @@ class MyCourses extends React.Component {
                     <div className="flex">
                       <Link
                         className="card-title"
-                        to={`/courses/${course.courseId}`}
+                        to={`/student/takelesson/${course.courseId}`}
                       >
                         {course.courseTitle}
                       </Link>
@@ -65,7 +65,7 @@ class MyCourses extends React.Component {
                       </small>
                     </div>
                     <Link
-                      to={`/courses/${course.courseId}`}
+                      to={`/student/takelesson/${course.courseId}`}
                       data-toggle="tooltip"
                       data-title="Remove Favorite"
                       data-placement="top"
