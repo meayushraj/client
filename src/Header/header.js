@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logoutUser } from "../Actions/actions";
+import { BeAnInstructorAction } from "../Actions/actions";
 
 class Header extends React.Component {
   onLogoutClick(e) {
@@ -14,6 +15,16 @@ class Header extends React.Component {
     const authLinks = (
       <ul className="nav navbar-nav ml-auto mr-0">
         <li className="nav-item">
+          <Link
+            to="#"
+            className="btn btn-outline-white"
+            onClick={() =>
+              this.props.BeAnInstructorAction(user.id, this.props.history)
+            }
+          >
+            Be An Instructor
+          </Link>
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <Link
             to="#"
             className="btn btn-outline-white"
@@ -298,6 +309,7 @@ class Header extends React.Component {
             placeholder="Search ..."
           />
         </form>
+
         {isAuthenticated ? authLinks : guestLinks}
       </div>
     );
@@ -307,4 +319,6 @@ class Header extends React.Component {
 const mapStateToProps = (state) => ({
   Credentials: state.Credentials,
 });
-export default connect(mapStateToProps, { logoutUser })(Header);
+export default connect(mapStateToProps, { logoutUser, BeAnInstructorAction })(
+  Header
+);

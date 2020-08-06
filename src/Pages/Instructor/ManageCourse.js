@@ -14,10 +14,18 @@ class ManageCourse extends React.Component {
       this.props.FetchInstructorCourseByInstructorId(this.props.id);
     }
   }
+  renderPermission(p) {
+    if (p === "accept") {
+      return <a class="ui teal tag label">Accepted</a>;
+    } else {
+      return <a class="ui red tag label">Declined</a>;
+    }
+  }
   renderinscourses() {
     if (this.props.instructorcourse) {
       console.log(this.props.instructorcourse[0]);
       return this.props.instructorcourse.map((course) => {
+        console.log(course.permission);
         return (
           <div className="col-md-6 col-lg-4 col-xl-3 card-group-row__col">
             <div
@@ -95,6 +103,8 @@ class ManageCourse extends React.Component {
                     </div>
                     <small className="text-50">6 hours</small>
                   </div>
+                  <br />
+                  {this.renderPermission(course.permission)}
                 </div>
                 <br />
                 <Link to={`/instructor/edit/${course._id}`}>

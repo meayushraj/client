@@ -4,16 +4,21 @@ import { Credentials } from "aws-sdk";
 import { FetchInstructorCourseByInstructorId } from "../../Actions/actions";
 //import InsDrawer from "../../Drawer/instructordrawer";
 import AdminDrawer from "./AdminDrawer";
+import { FetchInsCourseUnderPending } from "../../Actions/AdminActions";
+import {
+  ApproveCourseAction,
+  DeclineCourseAction,
+} from "../../Actions/AdminActions";
 
 import Header from "../../Header/header";
 import { Link } from "react-router-dom";
 
-class AdminManageCourse extends React.Component {
+class ApproveCourse extends React.Component {
   componentDidMount() {
     if (!this.props.id) {
       this.props.history.push("/");
     } else {
-      this.props.FetchInstructorCourseByInstructorId(this.props.id);
+      this.props.FetchInsCourseUnderPending(this.props.id);
     }
   }
   renderinscourses() {
@@ -101,22 +106,28 @@ class AdminManageCourse extends React.Component {
                   </div>
                 </div>
                 <br />
-                <Link to={`/admin/editcourse/${course._id}`}>
-                  <button
-                    className="ui green button"
-                    style={{ margin: "10px" }}
-                  >
-                    EDIT
-                  </button>
-                </Link>
-                <Link to={`/instructor/delete/${course._id}`}>
-                  <button
-                    className="ui red button"
-                    style={{ float: "right", margin: "10px" }}
-                  >
-                    DELETE
-                  </button>
-                </Link>
+
+                <button
+                  className="ui green button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.props.ApproveCourseAction(course._id);
+                  }}
+                  style={{ margin: "5px" }}
+                >
+                  Approve
+                </button>
+
+                <button
+                  className="ui red button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    this.props.DeclineCourseAction(course._id);
+                  }}
+                  style={{ float: "right", margin: "5px" }}
+                >
+                  Decline
+                </button>
               </div>
             </div>
           </div>
@@ -174,9 +185,11 @@ class AdminManageCourse extends React.Component {
 const mapStateToProps = (state) => {
   return {
     id: state.Credentials.user.id,
-    instructorcourse: state.instructorcourse.instructorcourse,
+    instructorcourse: state.FetchPending.pendingcourses,
   };
 };
 export default connect(mapStateToProps, {
-  FetchInstructorCourseByInstructorId,
-})(AdminManageCourse);
+  FetchInsCourseUnderPending,
+  ApproveCourseAction,
+  DeclineCourseAction,
+})(ApproveCourse);

@@ -39,6 +39,9 @@ import AdminManageCourse from "./Pages/Admin/ManageCourses";
 import AdminEditPage from "./Pages/Admin/EditCourse";
 import AdminDelete from "./Pages/Admin/DeleteCourse";
 import TakeLesson from "./Pages/Students/takelesson";
+import ListofUsers from "./Pages/Admin/ListofUsers";
+import UserDetails from "./Pages/Admin/UserDetails";
+import ApproveCourse from "./Pages/Admin/ApproveCourse";
 
 if (localStorage.token) {
   // set auth token
@@ -70,6 +73,9 @@ function App() {
           />
           <Route path="/admin/editcourse/:id" exact component={AdminEditPage} />
           <Route path="/admin/deletecourse/:id" exact component={AdminDelete} />
+          <Route path="/admin/listofusers" exact component={ListofUsers} />
+          <Route path="/admin/user/:id" exact component={UserDetails} />
+          <Route path="/admin/approvecourses" exact component={ApproveCourse} />
 
           {/* ADMIN */}
           <Route path="/" exact component={HomePage} />

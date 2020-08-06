@@ -58,3 +58,30 @@ export const AdminDeleteAction = (id, history) => async (dispatch) => {
   history.push("/admin/dashboard");
   dispatch({ type: "DEL_STREAM", payload: id });
 };
+
+export const FetchInsCourseUnderPending = () => async (dispatch) => {
+  const res = await axios.get("/admin/all-course/permission");
+  console.log(res);
+  dispatch({ type: "FETCH_PENDING", payload: res.data });
+};
+
+export const ApproveCourseAction = (id) => async (dispatch) => {
+  console.log(1111111);
+  const a = { permission: "accept" };
+  const res = await axios.put(`/admin/all-course/${id}/permission`, a);
+  dispatch({ type: "APPROVE", payload: res.data });
+};
+
+export const DeclineCourseAction = (id) => async (dispatch) => {
+  console.log(1111111);
+  const a = { permission: "decline" };
+  const res = await axios.put(`/admin/all-course/${id}/permission`, a);
+  dispatch({ type: "DECLINE", payload: res.data });
+};
+
+export const FetchAllUsersActions = () => async (dispatch) => {
+  console.log(1212);
+  const res = await axios.get("/admin/all-user");
+  console.log(res);
+  dispatch({ type: "FETCH_USERS", payload: res.data });
+};

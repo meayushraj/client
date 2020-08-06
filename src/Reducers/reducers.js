@@ -72,6 +72,20 @@ const FetchInsCourseReducer = (state = {}, action) => {
     return state;
   }
 };
+const FetchPendingReducer = (state = {}, action) => {
+  if (action.type === "FETCH_PENDING") {
+    return { ...state, pendingcourses: action.payload };
+  } else {
+    return state;
+  }
+};
+const FetchUsersReducer = (state = {}, action) => {
+  if (action.type === "FETCH_USERS") {
+    return { ...state, users: action.payload };
+  } else {
+    return state;
+  }
+};
 export default combineReducers({
   Credentials: ReducerAuthenticate,
   course: ReducerCourses,
@@ -83,4 +97,6 @@ export default combineReducers({
   forgetPassword: ForgetPasswordReducer,
   mycourses: ReducerUserCourses,
   instructorcourse: FetchInsCourseReducer,
+  FetchPending: FetchPendingReducer,
+  Users: FetchUsersReducer,
 });

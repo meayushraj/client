@@ -160,3 +160,12 @@ export const FetchInstructorCourseByInstructorId = (id) => async (dispatch) => {
   console.log(res.data);
   dispatch({ type: "FETCH_INS_COURSES", payload: res.data });
 };
+
+export const BeAnInstructorAction = (id, history) => async (dispatch) => {
+  console.log(id);
+  const a = { instructor: true };
+  const res = await axios.put(`/instructor/getting-started/${id}`, a);
+  console.log(res.data);
+  dispatch({ type: "BE_INST", payload: res.data });
+  // history.push("/instructor-dashboard");
+};
