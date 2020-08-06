@@ -9,6 +9,25 @@ class ListofUsers extends React.Component {
   componentDidMount() {
     this.props.FetchAllUsersActions();
   }
+  renderUsers() {
+    if (this.props.users) {
+      return this.props.users.map((user, id) => {
+        return (
+          <tr>
+            <td>{id}</td>
+            <td>{user.username}</td>
+            <td>
+              {user.email}&nbsp;&nbsp;
+              <i class="check circle icon" style={{ color: "green" }}></i>
+            </td>
+            <td>{user.date}</td>
+          </tr>
+        );
+      });
+    } else {
+      return <div></div>;
+    }
+  }
   render() {
     console.log(this.props.users);
     return (
@@ -21,7 +40,7 @@ class ListofUsers extends React.Component {
           <div className="mdk-drawer-layout__content page-content">
             <Header />
             <br />
-            <h1>List of Users</h1>
+            <h1 style={{ marginLeft: "20px" }}>List of Users</h1>
             <br />
             <Table striped bordered hover>
               <thead>
@@ -33,25 +52,7 @@ class ListofUsers extends React.Component {
                 </tr>
               </thead>
 
-              <tbody>
-                <tr onClick={() => console.log("clicked")}>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td colSpan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
+              <tbody>{this.renderUsers()}</tbody>
             </Table>
           </div>
 
