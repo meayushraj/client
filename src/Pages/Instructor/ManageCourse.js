@@ -17,8 +17,11 @@ class ManageCourse extends React.Component {
   renderPermission(p) {
     if (p === "accept") {
       return <a class="ui teal tag label">Accepted</a>;
-    } else {
+    }
+    if (p === "decline") {
       return <a class="ui red tag label">Declined</a>;
+    } else {
+      return <a class="ui tag label">Pending</a>;
     }
   }
   renderinscourses() {

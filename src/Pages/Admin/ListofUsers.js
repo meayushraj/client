@@ -4,7 +4,7 @@ import Header from "../../Header/header";
 import { Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { FetchAllUsersActions } from "../../Actions/AdminActions";
-
+import { Link } from "react-router-dom";
 class ListofUsers extends React.Component {
   componentDidMount() {
     this.props.FetchAllUsersActions();
@@ -14,8 +14,12 @@ class ListofUsers extends React.Component {
       return this.props.users.map((user, id) => {
         return (
           <tr>
-            <td>{id}</td>
-            <td>{user.username}</td>
+            <td>
+              <Link to={`/admin/user/${user._id}`}>{id}</Link>
+            </td>
+            <td>
+              <Link to={`/admin/user/${user._id}`}>{user.username}</Link>
+            </td>
             <td>
               {user.email}&nbsp;&nbsp;
               <i class="check circle icon" style={{ color: "green" }}></i>
