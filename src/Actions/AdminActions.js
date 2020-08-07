@@ -86,8 +86,21 @@ export const FetchAllUsersActions = () => async (dispatch) => {
   dispatch({ type: "FETCH_USERS", payload: res.data });
 };
 
+export const FetchAllInstructorActions = () => async (dispatch) => {
+  console.log(1212);
+  const res = await axios.get("/admin/get-instructor");
+  console.log(res);
+  dispatch({ type: "FETCH_INS", payload: res.data });
+};
+
 export const FetchUserDetailsAction = (id) => async (dispatch) => {
   const res = await axios.get(`/admin/get-user/${id}`);
   console.log(res);
   dispatch({ type: "USER_DETAILS", payload: res.data });
+};
+export const FetchInsDetailsAction = (id) => async (dispatch) => {
+  console.log(123);
+  const res = await axios.get(`/admin/get-instructor/${id}`);
+  console.log(res);
+  dispatch({ type: "INS_DETAILS", payload: res.data });
 };

@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import AdminDrawer from "./AdminDrawer";
 import Header from "../../Header/header";
 import { connect } from "react-redux";
-import { FetchUserDetailsAction } from "../../Actions/AdminActions";
+import { FetchInsDetailsAction } from "../../Actions/AdminActions";
 import { FetchCourseByIdAction } from "../../Actions/courseActions";
 import { FetchUsercoursesAction } from "../../Actions/orderAction";
+import { FetchInstructorCourseByInstructorId } from "../../Actions/actions";
 
-class UserDetails extends React.Component {
+class InsDetails extends React.Component {
   componentDidMount() {
-    this.props.FetchUserDetailsAction(this.props.match.params.id);
+    this.props.FetchInsDetailsAction(this.props.match.params.id);
   }
-  renderPrice(c) {
-    if (c === "0") {
+  renderPrice(c, p) {
+    if (c === "free") {
       return (
         <button style={{ float: "right" }} className="ui blue button">
           Free Course
@@ -20,12 +21,34 @@ class UserDetails extends React.Component {
     } else {
       return (
         <button style={{ float: "right" }} className="ui green button">
-          Cost ${c}
+          Cost ${p}
         </button>
       );
     }
   }
+  renderStatus(c) {
+    if (c === "accept") {
+      return (
+        <a style={{ float: "right", width: "150px" }} class="ui teal tag label">
+          Status: &nbsp;&nbsp;Accepted
+        </a>
+      );
+    } else if (c === "decline") {
+      return (
+        <a style={{ float: "right", width: "150px" }} class="ui red tag label">
+          Status: &nbsp;&nbsp;Declined
+        </a>
+      );
+    } else {
+      return (
+        <a style={{ float: "right", width: "150px" }} class="ui  tag label">
+          Status: &nbsp;&nbsp;Pending..
+        </a>
+      );
+    }
+  }
   renderCourses() {
+    console.log(this.props.courses);
     if (this.props.courses) {
       return this.props.courses.map((course) => {
         return (
@@ -40,7 +63,7 @@ class UserDetails extends React.Component {
               <div class="item">
                 <div class="image">
                   <img
-                    src={course.courseImageUrl}
+                    src={course.imageUrl}
                     style={{
                       borderRadius: "100px",
                       height: "150px",
@@ -50,14 +73,18 @@ class UserDetails extends React.Component {
                 </div>
 
                 <div class="content">
-                  <h2>{course.courseTitle}</h2>
+                  <h2>{course.title}</h2>
                   <a
                     style={{ float: "right", width: "230px" }}
                     class="ui teal tag label"
                   >
-                    Date of Purchase: &nbsp;&nbsp;{course.date}
+                    Date of Publish: &nbsp;&nbsp;{course.date}
                   </a>
-                  <h5>By:{course.instructorName}</h5>
+                  <br />
+                  <br />
+                  {this.renderStatus(course.permission)}
+
+                  <h5>By:{course.username}</h5>
                   <div className="d-flex">
                     <div className="rating flex">
                       <span className="rating__item">
@@ -77,7 +104,7 @@ class UserDetails extends React.Component {
                       </span>
                     </div>
                   </div>
-                  {this.renderPrice(course.courseCost)}
+                  {this.renderPrice(course.feeStructure, course.price)}
                 </div>
               </div>
             </div>
@@ -90,6 +117,7 @@ class UserDetails extends React.Component {
   }
   renderDetails() {
     if (this.props.user) {
+      console.log(this.props.user[0]);
       return (
         <div
           className="ui card"
@@ -100,39 +128,41 @@ class UserDetails extends React.Component {
               <div className="page-separator__text">User Details</div>
             </div>
             <h3 style={{ margin: "40px" }}>
-              User Name: {this.props.user.username}
+              User Name: {this.props.user[0].username}
             </h3>
             <h3 style={{ margin: "40px" }}>
-              User Email-Id: {this.props.user.email}{" "}
+              User Email-Id: {this.props.user[0].email}{" "}
               <i class="check circle icon" style={{ color: "green" }}></i>
             </h3>
             <h3 style={{ margin: "40px" }}>
-              Date Of Joining: {this.props.user.date}
+              Date Of Joining: {this.props.user[0].date}
             </h3>
-            <h3 style={{ margin: "40px" }}>Age: {this.props.user.age}</h3>
-            <h3 style={{ margin: "40px" }}>Gender: {this.props.user.sex}</h3>
+            <h3 style={{ margin: "40px" }}>Age: {this.props.user[0].age}</h3>
+            <h3 style={{ margin: "40px" }}>Gender: {this.props.user[0].sex}</h3>
             <h3 style={{ margin: "40px" }}>
-              Location: {this.props.user.location}
+              Location: {this.props.user[0].location}
             </h3>
             <h3 style={{ margin: "40px" }}>
-              Language : {this.props.user.language}
+              Language : {this.props.user[0].language}
             </h3>
             <h3 style={{ margin: "40px" }}>
               Field Of Interests :
               <ul>
-                <li>{this.props.user.fieldOfIntrest}</li>
+                <li>{this.props.user[0].fieldOfIntrest}</li>
               </ul>
             </h3>
 
             <div className="page-separator">
-              <div className="page-separator__text">Courses Purchased</div>
+              <div className="page-separator__text">
+                Made the Following Courses
+              </div>
             </div>
             <br />
 
             <hr />
             <button
               className="ui green button"
-              onClick={() => this.onSubmit(this.props.user._id)}
+              onClick={() => this.onSubmit(this.props.user[0]._id)}
             >
               Show Courses
             </button>
@@ -147,7 +177,7 @@ class UserDetails extends React.Component {
   }
   onSubmit = (p) => {
     console.log(p);
-    this.props.FetchUsercoursesAction(p);
+    this.props.FetchInstructorCourseByInstructorId(p);
   };
   render() {
     console.log(this.props.user);
@@ -163,7 +193,7 @@ class UserDetails extends React.Component {
             <div className="page-section">
               <div className="container-fluid page__container">
                 <br />
-                <h1>Details of User</h1>
+                <h1>Details of Instructor</h1>
                 <br />
 
                 {this.renderDetails()}
@@ -178,9 +208,12 @@ class UserDetails extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
-  return { user: state.user.user, courses: state.mycourses.mycourse };
+  return {
+    user: state.Instructor.user,
+    courses: state.instructorcourse.instructorcourse,
+  };
 };
 export default connect(mapStateToProps, {
-  FetchUserDetailsAction,
-  FetchUsercoursesAction,
-})(UserDetails);
+  FetchInsDetailsAction,
+  FetchInstructorCourseByInstructorId,
+})(InsDetails);

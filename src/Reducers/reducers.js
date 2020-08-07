@@ -86,6 +86,13 @@ const FetchUsersReducer = (state = {}, action) => {
     return state;
   }
 };
+const FetchInsReducer = (state = {}, action) => {
+  if (action.type === "FETCH_INS") {
+    return { ...state, users: action.payload };
+  } else {
+    return state;
+  }
+};
 const FetchAUserReducer = (state = {}, action) => {
   if (action.type === "USER_DETAILS") {
     return { ...state, user: action.payload };
@@ -93,6 +100,14 @@ const FetchAUserReducer = (state = {}, action) => {
     return state;
   }
 };
+const FetchAINSReducer = (state = {}, action) => {
+  if (action.type === "INS_DETAILS") {
+    return { ...state, user: action.payload };
+  } else {
+    return state;
+  }
+};
+
 export default combineReducers({
   Credentials: ReducerAuthenticate,
   course: ReducerCourses,
@@ -106,5 +121,7 @@ export default combineReducers({
   instructorcourse: FetchInsCourseReducer,
   FetchPending: FetchPendingReducer,
   Users: FetchUsersReducer,
+  Ins: FetchInsReducer,
   user: FetchAUserReducer,
+  Instructor: FetchAINSReducer,
 });

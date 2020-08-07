@@ -92,7 +92,7 @@ class AdminDrawer extends React.Component {
               <li className="sidebar-menu-item">
                 <Link
                   className="sidebar-menu-button"
-                  to="boxed-instructor-statement.html"
+                  to="/admin/listofinstructors"
                 >
                   <span className="material-icons sidebar-menu-icon sidebar-menu-icon--left">
                     receipt
